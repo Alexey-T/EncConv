@@ -62,60 +62,61 @@ type
   TEncConvUnicodeToCharID = function(Unicode: cardinal): integer;
   TEncConvStringFunction = function(const S: string): string;
 
-function UTF8BOMToUTF8(const s: string): string; // UTF8 with BOM
-function ISO_8859_1ToUTF8(const s: string): string; // central europe
-function ISO_8859_15ToUTF8(const s: string): string; // Western European languages
-function ISO_8859_2ToUTF8(const s: string): string; // eastern europe
-function CP1250ToUTF8(const s: string): string; // central europe
-function CP1251ToUTF8(const s: string): string; // cyrillic
-function CP1252ToUTF8(const s: string): string; // latin 1
-function CP1253ToUTF8(const s: string): string; // greek
-function CP1254ToUTF8(const s: string): string; // turkish
-function CP1255ToUTF8(const s: string): string; // hebrew
-function CP1256ToUTF8(const s: string): string; // arabic
-function CP1257ToUTF8(const s: string): string; // baltic
-function CP1258ToUTF8(const s: string): string; // vietnam
-function CP437ToUTF8(const s: string): string;  // DOS central europe
-function CP850ToUTF8(const s: string): string;  // DOS western europe
-function CP852ToUTF8(const s: string): string;  // DOS central europe
-function CP866ToUTF8(const s: string): string;  // DOS and Windows console's cyrillic
-function CP874ToUTF8(const s: string): string;  // thai
-function KOI8ToUTF8(const s: string): string;  // russian cyrillic
-function MacintoshToUTF8(const s: string): string;  // Macintosh, alias Mac OS Roman
+function UTF8BOMToUTF8(const s: string): string; inline; // UTF8 with BOM
+function ISO_8859_1ToUTF8(const s: string): string; inline; // central europe
+function ISO_8859_15ToUTF8(const s: string): string; inline; // Western European languages
+function ISO_8859_2ToUTF8(const s: string): string; inline; // eastern europe
+function CP1250ToUTF8(const s: string): string; inline; // central europe
+function CP1251ToUTF8(const s: string): string; inline; // cyrillic
+function CP1252ToUTF8(const s: string): string; inline; // latin 1
+function CP1253ToUTF8(const s: string): string; inline; // greek
+function CP1254ToUTF8(const s: string): string; inline; // turkish
+function CP1255ToUTF8(const s: string): string; inline; // hebrew
+function CP1256ToUTF8(const s: string): string; inline; // arabic
+function CP1257ToUTF8(const s: string): string; inline; // baltic
+function CP1258ToUTF8(const s: string): string; inline; // vietnam
+function CP437ToUTF8(const s: string): string;  inline; // DOS central europe
+function CP850ToUTF8(const s: string): string;  inline; // DOS western europe
+function CP852ToUTF8(const s: string): string;  inline; // DOS central europe
+function CP866ToUTF8(const s: string): string;  inline; // DOS and Windows console's cyrillic
+function CP874ToUTF8(const s: string): string;  inline; // thai
+function KOI8ToUTF8(const s: string): string;  inline; // russian cyrillic
+function MacintoshToUTF8(const s: string): string;  inline; // Macintosh, alias Mac OS Roman
+
 function UCS2LEToUTF8(const s: string): string; // UCS2-LE 2byte little endian
 function UCS2BEToUTF8(const s: string): string; // UCS2-BE 2byte big endian
 
-function UTF8ToUTF8BOM(const s: string): string; // UTF8 with BOM
-function UTF8ToISO_8859_1(const s: string): string; // central europe
-function UTF8ToISO_8859_2(const s: string): string; // eastern europe
-function UTF8ToISO_8859_15(const s: string): string; // Western European languages
-function UTF8ToCP1250(const s: string): string; // central europe
-function UTF8ToCP1251(const s: string): string; // cyrillic
-function UTF8ToCP1252(const s: string): string; // latin 1
-function UTF8ToCP1253(const s: string): string; // greek
-function UTF8ToCP1254(const s: string): string; // turkish
-function UTF8ToCP1255(const s: string): string; // hebrew
-function UTF8ToCP1256(const s: string): string; // arabic
-function UTF8ToCP1257(const s: string): string; // baltic
-function UTF8ToCP1258(const s: string): string; // vietnam
-function UTF8ToCP437(const s: string): string;  // DOS central europe
-function UTF8ToCP850(const s: string): string;  // DOS western europe
-function UTF8ToCP852(const s: string): string;  // DOS central europe
-function UTF8ToCP866(const s: string): string;  // DOS and Windows console's cyrillic
-function UTF8ToCP874(const s: string): string;  // thai
-function UTF8ToKOI8(const s: string): string;  // russian cyrillic
-function UTF8ToKOI8U(const s: string): string;  // ukrainian cyrillic
-function UTF8ToKOI8RU(const s: string): string;  // belarussian cyrillic
-function UTF8ToMacintosh(const s: string): string;  // Macintosh, alias Mac OS Roman
+function UTF8ToUTF8BOM(const s: string): string; inline;// UTF8 with BOM
+function UTF8ToISO_8859_1(const s: string): string; inline;// central europe
+function UTF8ToISO_8859_2(const s: string): string; inline;// eastern europe
+function UTF8ToISO_8859_15(const s: string): string; inline;// Western European languages
+function UTF8ToCP1250(const s: string): string; inline;// central europe
+function UTF8ToCP1251(const s: string): string; inline;// cyrillic
+function UTF8ToCP1252(const s: string): string; inline;// latin 1
+function UTF8ToCP1253(const s: string): string; inline;// greek
+function UTF8ToCP1254(const s: string): string; inline;// turkish
+function UTF8ToCP1255(const s: string): string; inline;// hebrew
+function UTF8ToCP1256(const s: string): string; inline;// arabic
+function UTF8ToCP1257(const s: string): string; inline;// baltic
+function UTF8ToCP1258(const s: string): string; inline;// vietnam
+function UTF8ToCP437(const s: string): string; inline; // DOS central europe
+function UTF8ToCP850(const s: string): string; inline; // DOS western europe
+function UTF8ToCP852(const s: string): string; inline; // DOS central europe
+function UTF8ToCP866(const s: string): string; inline; // DOS and Windows console's cyrillic
+function UTF8ToCP874(const s: string): string; inline; // thai
+function UTF8ToKOI8(const s: string): string; inline; // russian cyrillic
+function UTF8ToKOI8U(const s: string): string; inline; // ukrainian cyrillic
+function UTF8ToKOI8RU(const s: string): string; inline; // belarussian cyrillic
+function UTF8ToMacintosh(const s: string): string; inline; // Macintosh, alias Mac OS Roman
 
 function UTF8ToUCS2LE(const s: string): string; // UCS2-LE 2byte little endian without BOM
 function UTF8ToUCS2BE(const s: string): string; // UCS2-BE 2byte big endian without BOM
 
 {$IFnDEF DisableAsianCodePages}
-function CP932ToUTF8(const s: string): string;      // Japanese
-function CP936ToUTF8(const s: string): string;      // Chinese
-function CP949ToUTF8(const s: string): string;      // Korea
-function CP950ToUTF8(const s: string): string;      // Chinese Complex
+function CP932ToUTF8(const s: string): string; // Japanese
+function CP936ToUTF8(const s: string): string; // Chinese
+function CP949ToUTF8(const s: string): string; // Korea
+function CP950ToUTF8(const s: string): string; // Chinese Complex
 
 function UTF8ToCP932(const s: string): string; // Japanese
 function UTF8ToCP936(const s: string): string; // Chinese, essentially the same as GB 2312 and a predecessor to GB 18030
