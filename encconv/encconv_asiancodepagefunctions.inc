@@ -16,11 +16,7 @@ var
   c: char;
   code: word;
 begin
-  if s = '' then
-  begin
-    Result := s;
-    exit;
-  end;
+  if s = '' then exit('');
   len := length(s);
   SetLength(Result, len * 4);// Asia UTF-8 is at most 4 bytes
   Src  := PChar(s);
@@ -128,11 +124,7 @@ var
   c: char;
   Unicode: longword;
 begin
-  if s = '' then
-  begin
-    Result := '';
-    exit;
-  end;
+  if s = '' then exit('');
   len := length(s);
   SetLength(Result, len); // DBCS needs at most space as UTF-8
   Src  := PChar(s);
