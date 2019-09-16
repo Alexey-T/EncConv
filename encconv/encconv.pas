@@ -12,60 +12,55 @@ uses
 var
   ConvertEncodingFromUtf8RaisesException: boolean = False;
 
-//encoding names
-const
-  EncodingUTF8 = 'utf8';
-  EncodingUTF8BOM = 'utf8bom'; // UTF-8 with byte order mark
-  EncodingUCS2LE = 'ucs2le'; // UCS 2 byte little endian
-  EncodingUCS2BE = 'ucs2be'; // UCS 2 byte big endian
+type
+  TEncConvId = (
+    eidUTF8,
+    eidUTF8BOM,
+    eidUCS2LE,
+    eidUCS2BE,
 
-  EncodingCP1250 = 'cp1250';
-  EncodingCP1251 = 'cp1251';
-  EncodingCP1252 = 'cp1252';
-  EncodingCP1253 = 'cp1253';
-  EncodingCP1254 = 'cp1254';
-  EncodingCP1255 = 'cp1255';
-  EncodingCP1256 = 'cp1256';
-  EncodingCP1257 = 'cp1257';
-  EncodingCP1258 = 'cp1258';
+    eidCP1250,
+    eidCP1251,
+    eidCP1252,
+    eidCP1253,
+    eidCP1254,
+    eidCP1255,
+    eidCP1256,
+    eidCP1257,
+    eidCP1258,
 
-  EncodingCP437 = 'cp437';
-  EncodingCP850 = 'cp850';
-  EncodingCP852 = 'cp852';
-  EncodingCP866 = 'cp866';
-  EncodingCP874 = 'cp874';
+    eidCP437,
+    eidCP850,
+    eidCP852,
+    eidCP866,
+    eidCP874,
 
-  EncodingCP932 = 'cp932';
-  EncodingCP936 = 'cp936';
-  EncodingCP949 = 'cp949';
-  EncodingCP950 = 'cp950';
+    eidCP932,
+    eidCP936,
+    eidCP949,
+    eidCP950,
 
-  EncodingCPMac = 'macintosh';
-  EncodingCPKOI8 = 'koi8';
+    eidISO1,
+    eidISO2,
+    eidISO15,
 
-  EncodingCPIso1 = 'iso88591';
-  EncodingCPIso2 = 'iso88592';
-  EncodingCPIso15 = 'iso885915';
+    eidCPMac,
+    eidCPKOI8
+    );
 
-//signatures in ansi
 const
   UTF8BOM = #$EF#$BB#$BF;
-  UTF16BEBOM = #$FE#$FF;
-  UTF16LEBOM = #$FF#$FE;
-  UTF32BEBOM = #0#0#$FE#$FF;
-  UTF32LEBOM = #$FE#$FF#0#0;
+  //UTF16BEBOM = #$FE#$FF;
+  //UTF16LEBOM = #$FF#$FE;
+  //UTF32BEBOM = #0#0#$FE#$FF;
+  //UTF32LEBOM = #$FE#$FF#0#0;
 
-function ConvertEncodingFromUTF8(const s, ToEncoding: string; out Encoded: boolean): string;
-function ConvertEncodingToUTF8(const s, FromEncoding: string; out Encoded: boolean): string;
+function ConvertEncodingFromUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
+function ConvertEncodingToUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
 
 type
-  TConvertEncodingFunction = function(const s: string): string;
-  TConvertUTF8ToEncodingFunc = function(const s: string): string;
   TCharToUTF8Table = array[char] of PChar;
   TUnicodeToCharID = function(Unicode: cardinal): integer;
-var
-  ConvertAnsiToUTF8: TConvertEncodingFunction = nil;
-  ConvertUTF8ToAnsi: TConvertUTF8ToEncodingFunc = nil;
 
 function UTF8BOMToUTF8(const s: string): string; // UTF8 with BOM
 function ISO_8859_1ToUTF8(const s: string): string; // central europe
@@ -696,82 +691,80 @@ begin
 end;
 
 
-function ConvertEncodingFromUTF8(const s, ToEncoding: string; out Encoded: boolean): string;
-var
-  ATo: string;
+function ConvertEncodingFromUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
 begin
-  Result:=s;
-  Encoded:=true;
-  ATo:=ToEncoding;
+  Result:= S;
+  Encoded:= true;
 
-  if ATo=EncodingUTF8BOM then begin Result:=UTF8ToUTF8BOM(s); exit; end;
-  if ATo=EncodingCPIso1 then begin Result:=UTF8ToISO_8859_1(s); exit; end;
-  if ATo=EncodingCPIso15 then begin Result:=UTF8ToISO_8859_15(s); exit; end;
-  if ATo=EncodingCPIso2 then begin Result:=UTF8ToISO_8859_2(s); exit; end;
-  if ATo=EncodingCP1250 then begin Result:=UTF8ToCP1250(s); exit; end;
-  if ATo=EncodingCP1251 then begin Result:=UTF8ToCP1251(s); exit; end;
-  if ATo=EncodingCP1252 then begin Result:=UTF8ToCP1252(s); exit; end;
-  if ATo=EncodingCP1253 then begin Result:=UTF8ToCP1253(s); exit; end;
-  if ATo=EncodingCP1254 then begin Result:=UTF8ToCP1254(s); exit; end;
-  if ATo=EncodingCP1255 then begin Result:=UTF8ToCP1255(s); exit; end;
-  if ATo=EncodingCP1256 then begin Result:=UTF8ToCP1256(s); exit; end;
-  if ATo=EncodingCP1257 then begin Result:=UTF8ToCP1257(s); exit; end;
-  if ATo=EncodingCP1258 then begin Result:=UTF8ToCP1258(s); exit; end;
-  if ATo=EncodingCP437 then begin Result:=UTF8ToCP437(s); exit; end;
-  if ATo=EncodingCP850 then begin Result:=UTF8ToCP850(s); exit; end;
-  if ATo=EncodingCP852 then begin Result:=UTF8ToCP852(s); exit; end;
-  if ATo=EncodingCP866 then begin Result:=UTF8ToCP866(s); exit; end;
-  if ATo=EncodingCP874 then begin Result:=UTF8ToCP874(s); exit; end;
-  {$IFnDEF DisableAsianCodePages}
-  if ATo=EncodingCP936 then begin Result:=UTF8ToCP936(s); exit; end;
-  if ATo=EncodingCP950 then begin Result:=UTF8ToCP950(s); exit; end;
-  if ATo=EncodingCP949 then begin Result:=UTF8ToCP949(s); exit; end;
-  if ATo=EncodingCP932 then begin Result:=UTF8ToCP932(s); exit; end;
-  {$ENDIF}
-  if ATo=EncodingCPKOI8 then begin Result:=UTF8ToKOI8(s); exit; end;
-  if ATo=EncodingCPMac then begin Result:=UTF8ToMacintosh(s); exit; end;
-  if ATo=EncodingUCS2LE then begin Result:=UTF8ToUCS2LE(s); exit; end;
-  if ATo=EncodingUCS2BE then begin Result:=UTF8ToUCS2BE(s); exit; end;
+  case Enc of
+    eidUTF8BOM: begin Result:=UTF8ToUTF8BOM(S); exit; end;
+    eidCP1250: begin Result:=UTF8ToCP1250(S); exit; end;
+    eidCP1251: begin Result:=UTF8ToCP1251(S); exit; end;
+    eidCP1252: begin Result:=UTF8ToCP1252(S); exit; end;
+    eidCP1253: begin Result:=UTF8ToCP1253(S); exit; end;
+    eidCP1254: begin Result:=UTF8ToCP1254(S); exit; end;
+    eidCP1255: begin Result:=UTF8ToCP1255(S); exit; end;
+    eidCP1256: begin Result:=UTF8ToCP1256(S); exit; end;
+    eidCP1257: begin Result:=UTF8ToCP1257(S); exit; end;
+    eidCP1258: begin Result:=UTF8ToCP1258(S); exit; end;
+    eidCP437: begin Result:=UTF8ToCP437(S); exit; end;
+    eidCP850: begin Result:=UTF8ToCP850(S); exit; end;
+    eidCP852: begin Result:=UTF8ToCP852(S); exit; end;
+    eidCP866: begin Result:=UTF8ToCP866(S); exit; end;
+    eidCP874: begin Result:=UTF8ToCP874(S); exit; end;
+    eidISO1: begin Result:=UTF8ToISO_8859_1(S); exit; end;
+    eidISO2: begin Result:=UTF8ToISO_8859_2(S); exit; end;
+    eidISO15: begin Result:=UTF8ToISO_8859_15(S); exit; end;
+    {$IFnDEF DisableAsianCodePages}
+    eidCP936: begin Result:=UTF8ToCP936(S); exit; end;
+    eidCP950: begin Result:=UTF8ToCP950(S); exit; end;
+    eidCP949: begin Result:=UTF8ToCP949(S); exit; end;
+    eidCP932: begin Result:=UTF8ToCP932(S); exit; end;
+    {$ENDIF}
+    eidCPKOI8: begin Result:=UTF8ToKOI8(S); exit; end;
+    eidCPMac: begin Result:=UTF8ToMacintosh(S); exit; end;
+    eidUCS2LE: begin Result:=UTF8ToUCS2LE(S); exit; end;
+    eidUCS2BE: begin Result:=UTF8ToUCS2BE(S); exit; end;
+  end;
 
   Encoded:= false;
 end;
 
-function ConvertEncodingToUTF8(const s, FromEncoding: string; out Encoded: boolean): string;
-var
-  AFrom: string;
+function ConvertEncodingToUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
 begin
-  Result:=s;
-  Encoded:=true;
-  AFrom:=FromEncoding;
+  Result:= S;
+  Encoded:= true;
 
-  if AFrom=EncodingUTF8BOM then begin Result:=UTF8BOMToUTF8(s); exit; end;
-  if AFrom=EncodingCPIso1 then begin Result:=ISO_8859_1ToUTF8(s); exit; end;
-  if AFrom=EncodingCPIso15 then begin Result:=ISO_8859_15ToUTF8(s); exit; end;
-  if AFrom=EncodingCPIso2 then begin Result:=ISO_8859_2ToUTF8(s); exit; end;
-  if AFrom=EncodingCP1250 then begin Result:=CP1250ToUTF8(s); exit; end;
-  if AFrom=EncodingCP1251 then begin Result:=CP1251ToUTF8(s); exit; end;
-  if AFrom=EncodingCP1252 then begin Result:=CP1252ToUTF8(s); exit; end;
-  if AFrom=EncodingCP1253 then begin Result:=CP1253ToUTF8(s); exit; end;
-  if AFrom=EncodingCP1254 then begin Result:=CP1254ToUTF8(s); exit; end;
-  if AFrom=EncodingCP1255 then begin Result:=CP1255ToUTF8(s); exit; end;
-  if AFrom=EncodingCP1256 then begin Result:=CP1256ToUTF8(s); exit; end;
-  if AFrom=EncodingCP1257 then begin Result:=CP1257ToUTF8(s); exit; end;
-  if AFrom=EncodingCP1258 then begin Result:=CP1258ToUTF8(s); exit; end;
-  if AFrom=EncodingCP437 then begin Result:=CP437ToUTF8(s); exit; end;
-  if AFrom=EncodingCP850 then begin Result:=CP850ToUTF8(s); exit; end;
-  if AFrom=EncodingCP852 then begin Result:=CP852ToUTF8(s); exit; end;
-  if AFrom=EncodingCP866 then begin Result:=CP866ToUTF8(s); exit; end;
-  if AFrom=EncodingCP874 then begin Result:=CP874ToUTF8(s); exit; end;
-  {$IFnDEF DisableAsianCodePages}
-  if AFrom=EncodingCP936 then begin Result:=CP936ToUTF8(s); exit; end;
-  if AFrom=EncodingCP950 then begin Result:=CP950ToUTF8(s); exit; end;
-  if AFrom=EncodingCP949 then begin Result:=CP949ToUTF8(s); exit; end;
-  if AFrom=EncodingCP932 then begin Result:=CP932ToUTF8(s); exit; end;
-  {$ENDIF}
-  if AFrom=EncodingCPKOI8 then begin Result:=KOI8ToUTF8(s); exit; end;
-  if AFrom=EncodingCPMac then begin Result:=MacintoshToUTF8(s); exit; end;
-  if AFrom=EncodingUCS2LE then begin Result:=UCS2LEToUTF8(s); exit; end;
-  if AFrom=EncodingUCS2BE then begin Result:=UCS2BEToUTF8(s); exit; end;
+  case Enc of
+    eidUTF8BOM: begin Result:=UTF8BOMToUTF8(S); exit; end;
+    eidCP1250: begin Result:=CP1250ToUTF8(S); exit; end;
+    eidCP1251: begin Result:=CP1251ToUTF8(S); exit; end;
+    eidCP1252: begin Result:=CP1252ToUTF8(S); exit; end;
+    eidCP1253: begin Result:=CP1253ToUTF8(S); exit; end;
+    eidCP1254: begin Result:=CP1254ToUTF8(S); exit; end;
+    eidCP1255: begin Result:=CP1255ToUTF8(S); exit; end;
+    eidCP1256: begin Result:=CP1256ToUTF8(S); exit; end;
+    eidCP1257: begin Result:=CP1257ToUTF8(S); exit; end;
+    eidCP1258: begin Result:=CP1258ToUTF8(S); exit; end;
+    eidCP437: begin Result:=CP437ToUTF8(S); exit; end;
+    eidCP850: begin Result:=CP850ToUTF8(S); exit; end;
+    eidCP852: begin Result:=CP852ToUTF8(S); exit; end;
+    eidCP866: begin Result:=CP866ToUTF8(S); exit; end;
+    eidCP874: begin Result:=CP874ToUTF8(S); exit; end;
+    eidISO1: begin Result:=ISO_8859_1ToUTF8(S); exit; end;
+    eidISO2: begin Result:=ISO_8859_2ToUTF8(S); exit; end;
+    eidISO15: begin Result:=ISO_8859_15ToUTF8(S); exit; end;
+    {$IFnDEF DisableAsianCodePages}
+    eidCP936: begin Result:=CP936ToUTF8(S); exit; end;
+    eidCP950: begin Result:=CP950ToUTF8(S); exit; end;
+    eidCP949: begin Result:=CP949ToUTF8(S); exit; end;
+    eidCP932: begin Result:=CP932ToUTF8(S); exit; end;
+    {$ENDIF}
+    eidCPKOI8: begin Result:=KOI8ToUTF8(S); exit; end;
+    eidCPMac: begin Result:=MacintoshToUTF8(S); exit; end;
+    eidUCS2LE: begin Result:=UCS2LEToUTF8(S); exit; end;
+    eidUCS2BE: begin Result:=UCS2BEToUTF8(S); exit; end;
+  end;
 
   Encoded:= false;
 end;
