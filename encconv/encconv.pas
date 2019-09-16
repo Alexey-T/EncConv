@@ -52,8 +52,8 @@ function EncConvert_FromUTF8(const S: string; Enc: TEncConvId; out Encoded: bool
 function EncConvert_ToUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
 
 type
-  TCharToUTF8Table = array[char] of PChar;
-  TUnicodeToCharID = function(Unicode: cardinal): integer;
+  TEncConvTable = array[char] of PChar;
+  TEncConvUnicodeToCharID = function(Unicode: cardinal): integer;
 
 function UTF8BOMToUTF8(const s: string): string; // UTF8 with BOM
 function ISO_8859_1ToUTF8(const s: string): string; // central europe
@@ -75,7 +75,7 @@ function CP866ToUTF8(const s: string): string;  // DOS and Windows console's cyr
 function CP874ToUTF8(const s: string): string;  // thai
 function KOI8ToUTF8(const s: string): string;  // russian cyrillic
 function MacintoshToUTF8(const s: string): string;  // Macintosh, alias Mac OS Roman
-function SingleByteToUTF8(const s: string; const Table: TCharToUTF8Table): string;
+function SingleByteToUTF8(const s: string; const Table: TEncConvTable): string;
 function UCS2LEToUTF8(const s: string): string; // UCS2-LE 2byte little endian
 function UCS2BEToUTF8(const s: string): string; // UCS2-BE 2byte big endian
 
@@ -102,7 +102,7 @@ function UTF8ToKOI8U(const s: string): RawByteString;  // ukrainian cyrillic
 function UTF8ToKOI8RU(const s: string): RawByteString;  // belarussian cyrillic
 function UTF8ToMacintosh(const s: string): RawByteString;  // Macintosh, alias Mac OS Roman
 // custom conversion
-function UTF8ToSingleByte(const s: string; const UTF8CharConvFunc: TUnicodeToCharID): string;
+function UTF8ToSingleByte(const s: string; const UTF8CharConvFunc: TEncConvUnicodeToCharID): string;
 
 function UTF8ToUCS2LE(const s: string): string; // UCS2-LE 2byte little endian without BOM
 function UTF8ToUCS2BE(const s: string): string; // UCS2-BE 2byte big endian without BOM
@@ -122,7 +122,7 @@ function UTF8ToCP949(const s: string): RawByteString; // Korea
 function UTF8ToCP950(const s: string): RawByteString; // Chinese Complex
 
 // Common function used by all UTF8ToXXX functions.
-function UTF8ToDBCS(const s: string; const UTF8CharConvFunc: TUnicodeToCharID): string;
+function UTF8ToDBCS(const s: string; const UTF8CharConvFunc: TEncConvUnicodeToCharID): string;
 {$ENDIF}
 
 implementation
@@ -235,7 +235,7 @@ begin
   Result:=SingleByteToUTF8(s,ArrayMacintoshToUTF8);
 end;
 
-function SingleByteToUTF8(const s: string; const Table: TCharToUTF8Table): string;
+function SingleByteToUTF8(const s: string; const Table: TEncConvTable): string;
 var
   len: Integer;
   i: Integer;
@@ -337,7 +337,7 @@ begin
 end;
 
 procedure InternalUTF8ToCP(const s: string;
-  const UTF8CharConvFunc: TUnicodeToCharID;
+  const UTF8CharConvFunc: TEncConvUnicodeToCharID;
   out TheResult: RawByteString); inline;
 begin
   TheResult:=UTF8ToSingleByte(s,UTF8CharConvFunc);
@@ -562,7 +562,7 @@ begin
   Result:=UTF8ToSingleByte(s,@UnicodeToMacintosh);
 end;
 
-function UTF8ToSingleByte(const s: string; const UTF8CharConvFunc: TUnicodeToCharID): string;
+function UTF8ToSingleByte(const s: string; const UTF8CharConvFunc: TEncConvUnicodeToCharID): string;
 var
   len, i, CharLen: Integer;
   Src, Dest: PChar;

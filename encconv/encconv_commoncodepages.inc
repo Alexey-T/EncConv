@@ -1,5 +1,5 @@
 const
-  ArrayISO_8859_1ToUTF8: TCharToUTF8Table = (
+  ArrayISO_8859_1ToUTF8: TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -258,7 +258,7 @@ const
     #195#191            // #255
   );
 
-  ArrayISO_8859_15ToUTF8: TCharToUTF8Table = (
+  ArrayISO_8859_15ToUTF8: TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -516,7 +516,7 @@ const
     #195#190,           // #254
     #195#191            // #255
   );
-  ArrayISO_8859_2ToUTF8: TCharToUTF8Table = (
+  ArrayISO_8859_2ToUTF8: TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -776,7 +776,7 @@ const
   );
 
 
-  ArrayCP1250ToUTF8: TCharToUTF8Table = (
+  ArrayCP1250ToUTF8: TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -1035,7 +1035,7 @@ const
     #203#153            // #255
   );
 
-  ArrayCP1251ToUTF8: TCharToUTF8Table = (
+  ArrayCP1251ToUTF8: TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -1294,7 +1294,7 @@ const
     #209#143            // #255
   );
 
-  ArrayCP1252ToUTF8: TCharToUTF8Table = (
+  ArrayCP1252ToUTF8: TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -1553,7 +1553,7 @@ const
     #195#191            // #255
   );
 
-  ArrayCP1253ToUTF8: TCharToUTF8Table = (
+  ArrayCP1253ToUTF8: TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -1812,7 +1812,7 @@ const
     #207#143            // #255
   );
 
-  ArrayCP1254ToUTF8: TCharToUTF8Table = (
+  ArrayCP1254ToUTF8: TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -2071,7 +2071,7 @@ const
     #195#191            // #255
   );
 
-  ArrayCP1255ToUTF8: TCharToUTF8Table = (
+  ArrayCP1255ToUTF8: TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -2330,7 +2330,7 @@ const
     #215#173            // #255
   );
 
-  ArrayCP1256ToUTF8: TCharToUTF8Table = (
+  ArrayCP1256ToUTF8: TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -2589,7 +2589,7 @@ const
     #219#146            // #255
   );
 
-  ArrayCP1257ToUTF8: TCharToUTF8Table = (
+  ArrayCP1257ToUTF8: TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -2848,7 +2848,7 @@ const
     #203#153            // #255
   );
 
-  ArrayCP1258ToUTF8: TCharToUTF8Table = (
+  ArrayCP1258ToUTF8: TEncConvTable = (
   #0,                 // #0
   #1,                 // #1
   #2,                 // #2
@@ -3107,7 +3107,7 @@ const
   #195#191            // #255
   );
 
-  ArrayCP437ToUTF8 : TCharToUTF8Table = (
+  ArrayCP437ToUTF8 : TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -3366,7 +3366,7 @@ const
     #194#160            // #255
   );
 
-  ArrayCP850ToUTF8 : TCharToUTF8Table = (
+  ArrayCP850ToUTF8 : TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -3626,7 +3626,7 @@ const
   );
 
   // ftp://ftp.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/PC/CP852.TXT
-  ArrayCP852ToUTF8 : TCharToUTF8Table = (
+  ArrayCP852ToUTF8 : TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -3885,7 +3885,7 @@ const
     #194#160            // #255
   );
 
-  ArrayCP866ToUTF8 : TCharToUTF8Table = (
+  ArrayCP866ToUTF8 : TEncConvTable = (
     #0,                 //#0
     #1,                 //#1
     #2,                 //#2
@@ -4144,7 +4144,7 @@ const
     #194#160            //#255
   );
 
-  ArrayCP874ToUTF8: TCharToUTF8Table = (
+  ArrayCP874ToUTF8: TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -4403,7 +4403,7 @@ const
     #195#191            // #255
   );
 
-  ArrayKOI8ToUTF8: TCharToUTF8Table = (
+  ArrayKOI8ToUTF8: TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2
@@ -4662,7 +4662,7 @@ const
     ''                  // #255
   );
 
-  ArrayMacintoshToUTF8: TCharToUTF8Table = (
+  ArrayMacintoshToUTF8: TEncConvTable = (
     #0,                 // #0
     #1,                 // #1
     #2,                 // #2

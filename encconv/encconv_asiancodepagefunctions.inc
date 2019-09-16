@@ -7,9 +7,6 @@
   See the file COPYING.modifiedLGPL.txt, included in this distribution,
   for details about the license.
  *****************************************************************************
-
-  Asian Unicode Functions.
-  The clipboard is able to work with the windows and gtk behaviour/features.
 }
 
 function DBCSToUTF8(const s: string; CodeP: integer): string;
@@ -128,7 +125,7 @@ end;
 
 {$ifdef FPC_HAS_CPSTRING}
 procedure InternalUTF8ToDBCS(const s: string;
-  const UTF8CharConvFunc: TUnicodeToCharID;
+  const UTF8CharConvFunc: TEncConvUnicodeToCharID;
   out TheResult: RawByteString); inline;
 begin
   TheResult:=UTF8ToDBCS(s,UTF8CharConvFunc);
@@ -175,7 +172,7 @@ begin
 end;
 {$ENDIF}
 
-function UTF8ToDBCS(const s: string; const UTF8CharConvFunc: TUnicodeToCharID): string;
+function UTF8ToDBCS(const s: string; const UTF8CharConvFunc: TEncConvUnicodeToCharID): string;
 var
   len, i, CharLen: integer;
   Src, Dest: PChar;
