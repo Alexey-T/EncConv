@@ -1,3 +1,9 @@
+{
+Codepage convertion functions, based on Lazarus' LConvEncoding code,
+but with simpler API.
+(c) 2019 Alexey Torgashin
+License: the same as Lazarus has
+}
 unit EncConv;
 
 {$mode objfpc}{$H+}
@@ -32,10 +38,12 @@ type
     eidCP866,
     eidCP874,
 
+    {$IFnDEF DisableAsianCodePages}
     eidCP932,
     eidCP936,
     eidCP949,
     eidCP950,
+    {$ENDIF}
 
     eidISO1,
     eidISO2,
