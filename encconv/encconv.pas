@@ -9,9 +9,6 @@ interface
 uses
   SysUtils, Classes, LazUTF8;
 
-var
-  ConvertEncodingFromUtf8RaisesException: boolean = False;
-
 type
   TEncConvId = (
     eidUTF8,
@@ -115,6 +112,17 @@ function UTF8ToCP936(const s: string): string; // Chinese, essentially the same 
 function UTF8ToCP949(const s: string): string; // Korea
 function UTF8ToCP950(const s: string): string; // Chinese Complex
 {$ENDIF}
+
+type
+  TEncConvErrorMode = (
+    eemSkip,
+    eemException,
+    eemReplace,
+    eemReturnEmpty
+    );
+
+var
+  EncConvErrorMode: TEncConvErrorMode = eemReplace;
 
 implementation
 
@@ -565,10 +573,7 @@ var
   c: Char;
   Unicode: LongWord;
 begin
-  if s='' then begin
-    Result:='';
-    exit;
-  end;
+  if s='' then exit('');
   len:=length(s);
   SetLength(Result,len);
   Src:=PChar(s);
@@ -591,8 +596,17 @@ begin
         inc(Dest);
       end
       else
-      if ConvertEncodingFromUtf8RaisesException then
-        raise EConvertError.Create('Cannot convert UTF8 to single byte');
+      case EncConvErrorMode of
+        eemException:
+          raise EConvertError.Create('Cannot convert UTF8 to single byte');
+        eemReplace:
+          begin
+            Dest^ := '?';
+            Inc(Dest);
+          end;
+        eemReturnEmpty:
+          exit('');
+      end;
     end;
   end;
   SetLength(Result,Dest-PChar(Result));

@@ -165,8 +165,17 @@ begin
         Inc(Dest);
       end
       else
-      if ConvertEncodingFromUtf8RaisesException then
-        raise EConvertError.Create('Cannot convert UTF8 to DBCS code page');
+      case EncConvErrorMode of
+        eemException:
+          raise EConvertError.Create('Cannot convert UTF8 to DBCS code page');
+        eemReplace:
+          begin
+            Dest^ := '?';
+            Inc(Dest);
+          end;
+        eemReturnEmpty:
+          exit('');
+      end;
     end;
   until false;
   //SetLength(Result, Dest - PChar(Result));
