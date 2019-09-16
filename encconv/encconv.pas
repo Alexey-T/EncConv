@@ -48,15 +48,8 @@ type
     eidCPKOI8
     );
 
-const
-  UTF8BOM = #$EF#$BB#$BF;
-  //UTF16BEBOM = #$FE#$FF;
-  //UTF16LEBOM = #$FF#$FE;
-  //UTF32BEBOM = #0#0#$FE#$FF;
-  //UTF32LEBOM = #$FE#$FF#0#0;
-
-function ConvertEncodingFromUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
-function ConvertEncodingToUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
+function EncConvert_FromUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
+function EncConvert_ToUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
 
 type
   TCharToUTF8Table = array[char] of PChar;
@@ -251,10 +244,7 @@ var
   p: PChar;
   c: Char;
 begin
-  if s='' then begin
-    Result:='';
-    exit;
-  end;
+  if s='' then exit('');
   len:=length(s);
   SetLength(Result,len*4);// UTF-8 is at most 4 bytes
   Src:=PChar(s);
@@ -340,6 +330,8 @@ begin
 end;
 
 function UTF8ToUTF8BOM(const s: string): string;
+const
+  UTF8BOM = #$EF#$BB#$BF;
 begin
   Result:=UTF8BOM+s;
 end;
@@ -691,7 +683,7 @@ begin
 end;
 
 
-function ConvertEncodingFromUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
+function EncConvert_FromUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
 begin
   Result:= S;
   Encoded:= true;
@@ -730,7 +722,7 @@ begin
   Encoded:= false;
 end;
 
-function ConvertEncodingToUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
+function EncConvert_ToUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
 begin
   Result:= S;
   Encoded:= true;
