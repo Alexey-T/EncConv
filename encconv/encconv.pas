@@ -75,7 +75,6 @@ function CP866ToUTF8(const s: string): string;  // DOS and Windows console's cyr
 function CP874ToUTF8(const s: string): string;  // thai
 function KOI8ToUTF8(const s: string): string;  // russian cyrillic
 function MacintoshToUTF8(const s: string): string;  // Macintosh, alias Mac OS Roman
-function SingleByteToUTF8(const s: string; const Table: TEncConvTable): string;
 function UCS2LEToUTF8(const s: string): string; // UCS2-LE 2byte little endian
 function UCS2BEToUTF8(const s: string): string; // UCS2-BE 2byte big endian
 
@@ -101,39 +100,38 @@ function UTF8ToKOI8(const s: string): RawByteString;  // russian cyrillic
 function UTF8ToKOI8U(const s: string): RawByteString;  // ukrainian cyrillic
 function UTF8ToKOI8RU(const s: string): RawByteString;  // belarussian cyrillic
 function UTF8ToMacintosh(const s: string): RawByteString;  // Macintosh, alias Mac OS Roman
-// custom conversion
-function UTF8ToSingleByte(const s: string; const UTF8CharConvFunc: TEncConvUnicodeToCharID): string;
 
 function UTF8ToUCS2LE(const s: string): string; // UCS2-LE 2byte little endian without BOM
 function UTF8ToUCS2BE(const s: string): string; // UCS2-BE 2byte big endian without BOM
 
 {$IFnDEF DisableAsianCodePages}
-// Asian encodings
 function CP932ToUTF8(const s: string): string;      // Japanese
 function CP936ToUTF8(const s: string): string;      // Chinese
 function CP949ToUTF8(const s: string): string;      // Korea
 function CP950ToUTF8(const s: string): string;      // Chinese Complex
 
-function DBCSToUTF8(const s: string; CodeP: integer): string;
-
 function UTF8ToCP932(const s: string): RawByteString; // Japanese
 function UTF8ToCP936(const s: string): RawByteString; // Chinese, essentially the same as GB 2312 and a predecessor to GB 18030
 function UTF8ToCP949(const s: string): RawByteString; // Korea
 function UTF8ToCP950(const s: string): RawByteString; // Chinese Complex
-
-// Common function used by all UTF8ToXXX functions.
-function UTF8ToDBCS(const s: string; const UTF8CharConvFunc: TEncConvUnicodeToCharID): string;
 {$ENDIF}
 
 implementation
 
 {$IFnDEF DisableAsianCodePages}
+function UTF8ToDBCS(const s: string; const UTF8CharConvFunc: TEncConvUnicodeToCharID): string;
+forward;
 {$include encconv_asiancodepages.inc}
 {$include encconv_asiancodepagefunctions.inc}
 {$ENDIF}
 
 {$include encconv_commoncodepages.inc}
 {$include encconv_commoncodepagefunctions.inc}
+
+function SingleByteToUTF8(const s: string; const Table: TEncConvTable): string;
+forward;
+function UTF8ToSingleByte(const s: string; const UTF8CharConvFunc: TEncConvUnicodeToCharID): string;
+forward;
 
 function UTF8BOMToUTF8(const s: string): string;
 begin

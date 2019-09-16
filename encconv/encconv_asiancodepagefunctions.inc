@@ -85,7 +85,6 @@ begin
   Result := DBCSToUTF8(s, 932);
 end;
 
-{$IfNDef UseSystemCPConv}
 function UnicodeToCP936(Unicode: cardinal): integer;
 begin
   case Unicode of
@@ -121,7 +120,6 @@ begin
       Result := CP932CU[SearchTable(Uni932U, Unicode)];
   end;
 end;
-{$endif}
 
 {$ifdef FPC_HAS_CPSTRING}
 procedure InternalUTF8ToDBCS(const s: string;
