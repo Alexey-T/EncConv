@@ -84,27 +84,27 @@ function UCS2LEToUTF8(const s: string): string; // UCS2-LE 2byte little endian
 function UCS2BEToUTF8(const s: string): string; // UCS2-BE 2byte big endian
 
 function UTF8ToUTF8BOM(const s: string): string; // UTF8 with BOM
-function UTF8ToISO_8859_1(const s: string): RawByteString; // central europe
-function UTF8ToISO_8859_2(const s: string): RawByteString; // eastern europe
-function UTF8ToISO_8859_15(const s: string): RawByteString; // Western European languages
-function UTF8ToCP1250(const s: string): RawByteString; // central europe
-function UTF8ToCP1251(const s: string): RawByteString; // cyrillic
-function UTF8ToCP1252(const s: string): RawByteString; // latin 1
-function UTF8ToCP1253(const s: string): RawByteString; // greek
-function UTF8ToCP1254(const s: string): RawByteString; // turkish
-function UTF8ToCP1255(const s: string): RawByteString; // hebrew
-function UTF8ToCP1256(const s: string): RawByteString; // arabic
-function UTF8ToCP1257(const s: string): RawByteString; // baltic
-function UTF8ToCP1258(const s: string): RawByteString; // vietnam
-function UTF8ToCP437(const s: string): RawByteString;  // DOS central europe
-function UTF8ToCP850(const s: string): RawByteString;  // DOS western europe
-function UTF8ToCP852(const s: string): RawByteString;  // DOS central europe
-function UTF8ToCP866(const s: string): RawByteString;  // DOS and Windows console's cyrillic
-function UTF8ToCP874(const s: string): RawByteString;  // thai
-function UTF8ToKOI8(const s: string): RawByteString;  // russian cyrillic
-function UTF8ToKOI8U(const s: string): RawByteString;  // ukrainian cyrillic
-function UTF8ToKOI8RU(const s: string): RawByteString;  // belarussian cyrillic
-function UTF8ToMacintosh(const s: string): RawByteString;  // Macintosh, alias Mac OS Roman
+function UTF8ToISO_8859_1(const s: string): string; // central europe
+function UTF8ToISO_8859_2(const s: string): string; // eastern europe
+function UTF8ToISO_8859_15(const s: string): string; // Western European languages
+function UTF8ToCP1250(const s: string): string; // central europe
+function UTF8ToCP1251(const s: string): string; // cyrillic
+function UTF8ToCP1252(const s: string): string; // latin 1
+function UTF8ToCP1253(const s: string): string; // greek
+function UTF8ToCP1254(const s: string): string; // turkish
+function UTF8ToCP1255(const s: string): string; // hebrew
+function UTF8ToCP1256(const s: string): string; // arabic
+function UTF8ToCP1257(const s: string): string; // baltic
+function UTF8ToCP1258(const s: string): string; // vietnam
+function UTF8ToCP437(const s: string): string;  // DOS central europe
+function UTF8ToCP850(const s: string): string;  // DOS western europe
+function UTF8ToCP852(const s: string): string;  // DOS central europe
+function UTF8ToCP866(const s: string): string;  // DOS and Windows console's cyrillic
+function UTF8ToCP874(const s: string): string;  // thai
+function UTF8ToKOI8(const s: string): string;  // russian cyrillic
+function UTF8ToKOI8U(const s: string): string;  // ukrainian cyrillic
+function UTF8ToKOI8RU(const s: string): string;  // belarussian cyrillic
+function UTF8ToMacintosh(const s: string): string;  // Macintosh, alias Mac OS Roman
 
 function UTF8ToUCS2LE(const s: string): string; // UCS2-LE 2byte little endian without BOM
 function UTF8ToUCS2BE(const s: string): string; // UCS2-BE 2byte big endian without BOM
@@ -346,127 +346,6 @@ const
   UTF8BOM = #$EF#$BB#$BF;
 begin
   Result:=UTF8BOM+s;
-end;
-
-procedure InternalUTF8ToCP(const s: string;
-  const UTF8CharConvFunc: TEncConvUnicodeToCharID;
-  out TheResult: RawByteString); inline;
-begin
-  TheResult:=UTF8ToSingleByte(s,UTF8CharConvFunc);
-end;
-
-function UTF8ToISO_8859_1(const s: string): RawByteString;
-begin
-  InternalUTF8ToCP(s,@UnicodeToISO_8859_1,Result);
-end;
-
-function UTF8ToISO_8859_2(const s: string): RawByteString;
-begin
-  InternalUTF8ToCP(s,@UnicodeToISO_8859_2,Result);
-end;
-
-function UTF8ToISO_8859_15(const s: string): RawByteString;
-begin
-  InternalUTF8ToCP(s,@UnicodeToISO_8859_15,Result);
-end;
-
-function UTF8ToCP1250(const s: string): RawByteString;
-begin
-  // system conversion fails for character #129 -> using table
-  InternalUTF8ToCP(s,@UnicodeToCP1250,Result);
-end;
-
-function UTF8ToCP1251(const s: string): RawByteString;
-begin
-  // system conversion fails for character #152 -> using table
-  InternalUTF8ToCP(s,@UnicodeToCP1251,Result);
-end;
-
-function UTF8ToCP1252(const s: string): RawByteString;
-begin
-  // system conversion fails for character #128 -> using table
-  InternalUTF8ToCP(s,@UnicodeToCP1252,Result);
-end;
-
-function UTF8ToCP1253(const s: string): RawByteString;
-begin
-  // system conversion fails for character #129 -> using table
-  InternalUTF8ToCP(s,@UnicodeToCP1253,Result);
-end;
-
-function UTF8ToCP1254(const s: string): RawByteString;
-begin
-  // system conversion fails for character #129 -> using table
-  InternalUTF8ToCP(s,@UnicodeToCP1254,Result);
-end;
-
-function UTF8ToCP1255(const s: string): RawByteString;
-begin
-  // system conversion fails for character #129 -> using table
-  InternalUTF8ToCP(s,@UnicodeToCP1255,Result);
-end;
-
-function UTF8ToCP1256(const s: string): RawByteString;
-begin
-  InternalUTF8ToCP(s,@UnicodeToCP1256,Result);
-end;
-
-function UTF8ToCP1257(const s: string): RawByteString;
-begin
-  // system conversion fails for character #129 -> using table
-  InternalUTF8ToCP(s,@UnicodeToCP1257,Result);
-end;
-
-function UTF8ToCP1258(const s: string): RawByteString;
-begin
-  // system conversion fails for character #129 -> using table
-  InternalUTF8ToCP(s,@UnicodeToCP1258,Result);
-end;
-
-function UTF8ToCP437(const s: string): RawByteString;
-begin
-  InternalUTF8ToCP(s,@UnicodeToCP437,Result);
-end;
-
-function UTF8ToCP850(const s: string): RawByteString;
-begin
-  InternalUTF8ToCP(s,@UnicodeToCP850,Result);
-end;
-
-function UTF8ToCP852(const s: string): RawByteString;
-begin
-  InternalUTF8ToCP(s,@UnicodeToCP852,Result);
-end;
-
-function UTF8ToCP866(const s: string): RawByteString;
-begin
-  InternalUTF8ToCP(s,@UnicodeToCP866,Result);
-end;
-
-function UTF8ToCP874(const s: string): RawByteString;
-begin
-  // system conversion fails for character #129 -> using table
-  InternalUTF8ToCP(s,@UnicodeToCP874,Result);
-end;
-
-function UTF8ToKOI8(const s: string): RawByteString;
-begin
-  InternalUTF8ToCP(s,@UnicodeToKOI8,Result);
-end;
-
-function UTF8ToKOI8U(const s: string): RawByteString;
-begin
-  InternalUTF8ToCP(s,@UnicodeToKOI8U,Result);
-end;
-
-function UTF8ToKOI8RU(const s: string): RawByteString;
-begin
-  InternalUTF8ToCP(s,@UnicodeToKOI8RU,Result);
-end;
-
-function UTF8ToMacintosh(const s: string): RawByteString;
-begin
-  InternalUTF8ToCP(s,@UnicodeToMacintosh,Result);
 end;
 
 function UTF8ToISO_8859_1(const s: string): string;
