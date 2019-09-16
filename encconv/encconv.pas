@@ -45,8 +45,8 @@ type
     eidCPKOI8
     );
 
-function EncConvert_FromUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
-function EncConvert_ToUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
+function EncConvertFromUTF8(const S: string; Enc: TEncConvId): string;
+function EncConvertToUTF8(const S: string; Enc: TEncConvId): string;
 
 type
   TEncConvTable = array[char] of PChar;
@@ -693,82 +693,74 @@ begin
 end;
 
 
-function EncConvert_FromUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
+function EncConvertFromUTF8(const S: string; Enc: TEncConvId): string;
 begin
-  Result:= S;
-  Encoded:= true;
-
   case Enc of
-    eidUTF8BOM: begin Result:=UTF8ToUTF8BOM(S); exit; end;
-    eidCP1250: begin Result:=UTF8ToCP1250(S); exit; end;
-    eidCP1251: begin Result:=UTF8ToCP1251(S); exit; end;
-    eidCP1252: begin Result:=UTF8ToCP1252(S); exit; end;
-    eidCP1253: begin Result:=UTF8ToCP1253(S); exit; end;
-    eidCP1254: begin Result:=UTF8ToCP1254(S); exit; end;
-    eidCP1255: begin Result:=UTF8ToCP1255(S); exit; end;
-    eidCP1256: begin Result:=UTF8ToCP1256(S); exit; end;
-    eidCP1257: begin Result:=UTF8ToCP1257(S); exit; end;
-    eidCP1258: begin Result:=UTF8ToCP1258(S); exit; end;
-    eidCP437: begin Result:=UTF8ToCP437(S); exit; end;
-    eidCP850: begin Result:=UTF8ToCP850(S); exit; end;
-    eidCP852: begin Result:=UTF8ToCP852(S); exit; end;
-    eidCP866: begin Result:=UTF8ToCP866(S); exit; end;
-    eidCP874: begin Result:=UTF8ToCP874(S); exit; end;
-    eidISO1: begin Result:=UTF8ToISO_8859_1(S); exit; end;
-    eidISO2: begin Result:=UTF8ToISO_8859_2(S); exit; end;
-    eidISO15: begin Result:=UTF8ToISO_8859_15(S); exit; end;
+    eidUTF8BOM: Result:=UTF8ToUTF8BOM(S);
+    eidCP1250: Result:=UTF8ToCP1250(S);
+    eidCP1251: Result:=UTF8ToCP1251(S);
+    eidCP1252: Result:=UTF8ToCP1252(S);
+    eidCP1253: Result:=UTF8ToCP1253(S);
+    eidCP1254: Result:=UTF8ToCP1254(S);
+    eidCP1255: Result:=UTF8ToCP1255(S);
+    eidCP1256: Result:=UTF8ToCP1256(S);
+    eidCP1257: Result:=UTF8ToCP1257(S);
+    eidCP1258: Result:=UTF8ToCP1258(S);
+    eidCP437: Result:=UTF8ToCP437(S);
+    eidCP850: Result:=UTF8ToCP850(S);
+    eidCP852: Result:=UTF8ToCP852(S);
+    eidCP866: Result:=UTF8ToCP866(S);
+    eidCP874: Result:=UTF8ToCP874(S);
+    eidISO1: Result:=UTF8ToISO_8859_1(S);
+    eidISO2: Result:=UTF8ToISO_8859_2(S);
+    eidISO15: Result:=UTF8ToISO_8859_15(S);
     {$IFnDEF DisableAsianCodePages}
-    eidCP936: begin Result:=UTF8ToCP936(S); exit; end;
-    eidCP950: begin Result:=UTF8ToCP950(S); exit; end;
-    eidCP949: begin Result:=UTF8ToCP949(S); exit; end;
-    eidCP932: begin Result:=UTF8ToCP932(S); exit; end;
+    eidCP936: Result:=UTF8ToCP936(S);
+    eidCP950: Result:=UTF8ToCP950(S);
+    eidCP949: Result:=UTF8ToCP949(S);
+    eidCP932: Result:=UTF8ToCP932(S);
     {$ENDIF}
-    eidCPKOI8: begin Result:=UTF8ToKOI8(S); exit; end;
-    eidCPMac: begin Result:=UTF8ToMacintosh(S); exit; end;
-    eidUCS2LE: begin Result:=UTF8ToUCS2LE(S); exit; end;
-    eidUCS2BE: begin Result:=UTF8ToUCS2BE(S); exit; end;
+    eidCPKOI8: Result:=UTF8ToKOI8(S);
+    eidCPMac: Result:=UTF8ToMacintosh(S);
+    eidUCS2LE: Result:=UTF8ToUCS2LE(S);
+    eidUCS2BE: Result:=UTF8ToUCS2BE(S);
+    else Result:= S;
   end;
-
-  Encoded:= false;
 end;
 
-function EncConvert_ToUTF8(const S: string; Enc: TEncConvId; out Encoded: boolean): string;
+function EncConvertToUTF8(const S: string; Enc: TEncConvId): string;
 begin
-  Result:= S;
-  Encoded:= true;
-
   case Enc of
-    eidUTF8BOM: begin Result:=UTF8BOMToUTF8(S); exit; end;
-    eidCP1250: begin Result:=CP1250ToUTF8(S); exit; end;
-    eidCP1251: begin Result:=CP1251ToUTF8(S); exit; end;
-    eidCP1252: begin Result:=CP1252ToUTF8(S); exit; end;
-    eidCP1253: begin Result:=CP1253ToUTF8(S); exit; end;
-    eidCP1254: begin Result:=CP1254ToUTF8(S); exit; end;
-    eidCP1255: begin Result:=CP1255ToUTF8(S); exit; end;
-    eidCP1256: begin Result:=CP1256ToUTF8(S); exit; end;
-    eidCP1257: begin Result:=CP1257ToUTF8(S); exit; end;
-    eidCP1258: begin Result:=CP1258ToUTF8(S); exit; end;
-    eidCP437: begin Result:=CP437ToUTF8(S); exit; end;
-    eidCP850: begin Result:=CP850ToUTF8(S); exit; end;
-    eidCP852: begin Result:=CP852ToUTF8(S); exit; end;
-    eidCP866: begin Result:=CP866ToUTF8(S); exit; end;
-    eidCP874: begin Result:=CP874ToUTF8(S); exit; end;
-    eidISO1: begin Result:=ISO_8859_1ToUTF8(S); exit; end;
-    eidISO2: begin Result:=ISO_8859_2ToUTF8(S); exit; end;
-    eidISO15: begin Result:=ISO_8859_15ToUTF8(S); exit; end;
+    eidUTF8BOM: Result:=UTF8BOMToUTF8(S);
+    eidCP1250: Result:=CP1250ToUTF8(S);
+    eidCP1251: Result:=CP1251ToUTF8(S);
+    eidCP1252: Result:=CP1252ToUTF8(S);
+    eidCP1253: Result:=CP1253ToUTF8(S);
+    eidCP1254: Result:=CP1254ToUTF8(S);
+    eidCP1255: Result:=CP1255ToUTF8(S);
+    eidCP1256: Result:=CP1256ToUTF8(S);
+    eidCP1257: Result:=CP1257ToUTF8(S);
+    eidCP1258: Result:=CP1258ToUTF8(S);
+    eidCP437: Result:=CP437ToUTF8(S);
+    eidCP850: Result:=CP850ToUTF8(S);
+    eidCP852: Result:=CP852ToUTF8(S);
+    eidCP866: Result:=CP866ToUTF8(S);
+    eidCP874: Result:=CP874ToUTF8(S);
+    eidISO1: Result:=ISO_8859_1ToUTF8(S);
+    eidISO2: Result:=ISO_8859_2ToUTF8(S);
+    eidISO15: Result:=ISO_8859_15ToUTF8(S);
     {$IFnDEF DisableAsianCodePages}
-    eidCP936: begin Result:=CP936ToUTF8(S); exit; end;
-    eidCP950: begin Result:=CP950ToUTF8(S); exit; end;
-    eidCP949: begin Result:=CP949ToUTF8(S); exit; end;
-    eidCP932: begin Result:=CP932ToUTF8(S); exit; end;
+    eidCP936: Result:=CP936ToUTF8(S);
+    eidCP950: Result:=CP950ToUTF8(S);
+    eidCP949: Result:=CP949ToUTF8(S);
+    eidCP932: Result:=CP932ToUTF8(S);
     {$ENDIF}
-    eidCPKOI8: begin Result:=KOI8ToUTF8(S); exit; end;
-    eidCPMac: begin Result:=MacintoshToUTF8(S); exit; end;
-    eidUCS2LE: begin Result:=UCS2LEToUTF8(S); exit; end;
-    eidUCS2BE: begin Result:=UCS2BEToUTF8(S); exit; end;
+    eidCPKOI8: Result:=KOI8ToUTF8(S);
+    eidCPMac: Result:=MacintoshToUTF8(S);
+    eidUCS2LE: Result:=UCS2LEToUTF8(S);
+    eidUCS2BE: Result:=UCS2BEToUTF8(S);
+    else Result:= S;
   end;
-
-  Encoded:= false;
 end;
 
 end.
