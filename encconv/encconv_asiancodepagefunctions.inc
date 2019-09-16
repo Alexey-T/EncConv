@@ -121,55 +121,6 @@ begin
   end;
 end;
 
-{$ifdef FPC_HAS_CPSTRING}
-procedure InternalUTF8ToDBCS(const s: string;
-  const UTF8CharConvFunc: TEncConvUnicodeToCharID;
-  out TheResult: RawByteString); inline;
-begin
-  TheResult:=UTF8ToDBCS(s,UTF8CharConvFunc);
-end;
-
-function UTF8ToCP932(const s: string): RawByteString;
-begin
-  InternalUTF8ToDBCS(s,@UnicodeToCP932,Result);
-end;
-
-function UTF8ToCP936(const s: string): RawByteString;
-begin
-  InternalUTF8ToDBCS(s,@UnicodeToCP936,Result);
-end;
-
-function UTF8ToCP949(const s: string): RawByteString;
-begin
-  InternalUTF8ToDBCS(s,@UnicodeToCP949,Result);
-end;
-
-function UTF8ToCP950(const s: string): RawByteString;
-begin
-  InternalUTF8ToDBCS(s,@UnicodeToCP950,Result);
-end;
-{$ELSE}
-function UTF8ToCP932(const s: string): string;
-begin
-  Result := UTF8ToDBCS(s, @UnicodeToCP932);
-end;
-
-function UTF8ToCP936(const s: string): string;
-begin
-  Result := UTF8ToDBCS(s, @UnicodeToCP936);
-end;
-
-function UTF8ToCP949(const s: string): string;
-begin
-  Result := UTF8ToDBCS(s, @UnicodeToCP949);
-end;
-
-function UTF8ToCP950(const s: string): string;
-begin
-  Result := UTF8ToDBCS(s, @UnicodeToCP950);
-end;
-{$ENDIF}
-
 function UTF8ToDBCS(const s: string; const UTF8CharConvFunc: TEncConvUnicodeToCharID): string;
 var
   len, i, CharLen: integer;
@@ -221,4 +172,25 @@ begin
   //SetLength(Result, Dest - PChar(Result));
   SetLength(Result, {%H-}PtrUInt(Dest) - PtrUInt(Result));
 end;
+
+function UTF8ToCP932(const s: string): string;
+begin
+  Result := UTF8ToDBCS(s, @UnicodeToCP932);
+end;
+
+function UTF8ToCP936(const s: string): string;
+begin
+  Result := UTF8ToDBCS(s, @UnicodeToCP936);
+end;
+
+function UTF8ToCP949(const s: string): string;
+begin
+  Result := UTF8ToDBCS(s, @UnicodeToCP949);
+end;
+
+function UTF8ToCP950(const s: string): string;
+begin
+  Result := UTF8ToDBCS(s, @UnicodeToCP950);
+end;
+
 

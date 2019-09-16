@@ -110,17 +110,15 @@ function CP936ToUTF8(const s: string): string;      // Chinese
 function CP949ToUTF8(const s: string): string;      // Korea
 function CP950ToUTF8(const s: string): string;      // Chinese Complex
 
-function UTF8ToCP932(const s: string): RawByteString; // Japanese
-function UTF8ToCP936(const s: string): RawByteString; // Chinese, essentially the same as GB 2312 and a predecessor to GB 18030
-function UTF8ToCP949(const s: string): RawByteString; // Korea
-function UTF8ToCP950(const s: string): RawByteString; // Chinese Complex
+function UTF8ToCP932(const s: string): string; // Japanese
+function UTF8ToCP936(const s: string): string; // Chinese, essentially the same as GB 2312 and a predecessor to GB 18030
+function UTF8ToCP949(const s: string): string; // Korea
+function UTF8ToCP950(const s: string): string; // Chinese Complex
 {$ENDIF}
 
 implementation
 
 {$IFnDEF DisableAsianCodePages}
-function UTF8ToDBCS(const s: string; const UTF8CharConvFunc: TEncConvUnicodeToCharID): string;
-forward;
 {$include encconv_asiancodepages.inc}
 {$include encconv_asiancodepagefunctions.inc}
 {$ENDIF}
