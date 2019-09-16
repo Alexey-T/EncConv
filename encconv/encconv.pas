@@ -57,7 +57,6 @@ function EncConvertFromUTF8(const S: string; Enc: TEncConvId): string;
 function EncConvertToUTF8(const S: string; Enc: TEncConvId): string;
 
 type
-  PEncConvTable = ^TEncConvTable;
   TEncConvTable = array[char] of PChar;
   TEncConvUnicodeToCharID = function(Unicode: cardinal): integer;
   TEncConvStringFunction = function(const S: string): string;
