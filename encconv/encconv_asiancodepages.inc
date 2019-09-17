@@ -1,5 +1,3 @@
-{%MainUnit ../lconvencoding.pp}
-
 {
  *****************************************************************************
   This file is part of LazUtils.
