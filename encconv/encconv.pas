@@ -53,6 +53,46 @@ type
     eidCPKOI8
     );
 
+const
+  cEncConvNames: array[TEncConvId] of string = (
+    'utf8',
+    'utf8_bom',
+    'utf16le',
+    'utf16be',
+
+    'cp1250',
+    'cp1251',
+    'cp1252',
+    'cp1253',
+    'cp1254',
+    'cp1255',
+    'cp1256',
+    'cp1257',
+    'cp1258',
+
+    'cp437',
+    'cp850',
+    'cp852',
+    'cp866',
+    'cp874',
+
+    {$IFnDEF DisableAsianCodePages}
+    'cp932',
+    'cp936',
+    'cp949',
+    'cp950',
+    {$ENDIF}
+
+    'iso88591',
+    'iso88592',
+    'iso885915',
+
+    'mac',
+    'koi8'
+    );
+
+function EncConvFindEncodingByName(const s: string): TEncConvId;
+
 function EncConvertFromUTF8(const S: string; Enc: TEncConvId): string;
 function EncConvertToUTF8(const S: string; Enc: TEncConvId): string;
 
@@ -651,6 +691,15 @@ begin
   SetLength(Result,len);
 end;
 
+function EncConvFindEncodingByName(const s: string): TEncConvId;
+var
+  e: TEncConvId;
+begin
+  for e:= Low(cEncConvNames) to High(cEncConvNames) do
+    if s=cEncConvNames[e] then
+      exit(e);
+  Result:= eidUTF8;
+end;
 
 function EncConvertFromUTF8(const S: string; Enc: TEncConvId): string;
 begin
