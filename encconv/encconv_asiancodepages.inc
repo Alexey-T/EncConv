@@ -18776,7 +18776,7 @@ $FF97,$FF98,$FF99,$FF9A,$FF9B,$FF9C,$FF9D,$FF9E,$FF9F,$FFE0,$FFE1,$FFE2,$FFE2,
 $FFE2,$FFE3,$FFE4,$FFE4,$FFE5);
 {$endif}
 
-function SearchTable(CodePageArr: array of word; id: cardinal): word;
+function SearchTable(const CodePageArr: array of word; id: cardinal): word;
 var
   idMid: integer;
   idLow, idHigh: integer;
