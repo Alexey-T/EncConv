@@ -10,9 +10,9 @@
         <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Description Value="EncConv: modified LConvEncoding to give different API"/>
-    <License Value="The same as Lazarus license"/>
-    <Version Minor="2"/>
+    <Description Value="Library to convert encoding inside a string, it is modified LConvEncoding to give simpler API"/>
+    <License Value="MPL 2.0, LGPL"/>
+    <Version Major="1"/>
     <Files Count="1">
       <Item1>
         <Filename Value="encconv.pas"/>
