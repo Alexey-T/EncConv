@@ -13,7 +13,7 @@ interface
 {.$Define DisableAsianCodePages}
 
 uses
-  SysUtils, Classes;
+  SysUtils, Classes, LazUTF8;
 
 type
   TEncConvId = (
@@ -175,8 +175,6 @@ var
   EncConvErrorMode: TEncConvErrorMode = eemReplace;
 
 implementation
-
-{$include encconv_lazutf8.inc}
 
 {$IFnDEF DisableAsianCodePages}
 {$include encconv_asiancodepages.inc}
