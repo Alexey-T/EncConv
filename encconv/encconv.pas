@@ -91,7 +91,7 @@ const
     'koi8'
     );
 
-function EncConvFindEncodingByName(const s: string): TEncConvId;
+function EncConvFindEncoding(const s: string): TEncConvId;
 
 function EncConvertFromUTF8(const S: string; Enc: TEncConvId): string;
 function EncConvertToUTF8(const S: string; Enc: TEncConvId): string;
@@ -691,7 +691,7 @@ begin
   SetLength(Result,len);
 end;
 
-function EncConvFindEncodingByName(const s: string): TEncConvId;
+function EncConvFindEncoding(const s: string): TEncConvId;
 var
   e: TEncConvId;
 begin
