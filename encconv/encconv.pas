@@ -10,7 +10,7 @@ unit EncConv;
 
 interface
 
-{.$Define DisableAsianCodePages}
+{.$Define encconv_noasian}
 
 uses
   SysUtils, Classes, LazUTF8;
@@ -38,7 +38,7 @@ type
     eidCP866,
     eidCP874,
 
-    {$IFnDEF DisableAsianCodePages}
+    {$IFnDEF encconv_noasian}
     eidCP932,
     eidCP936,
     eidCP949,
@@ -76,7 +76,7 @@ const
     'cp866',
     'cp874',
 
-    {$IFnDEF DisableAsianCodePages}
+    {$IFnDEF encconv_noasian}
     'cp932',
     'cp936',
     'cp949',
@@ -151,7 +151,7 @@ function UTF8ToMacintosh(const s: string): string; inline; // Macintosh, alias M
 function UTF8ToUCS2LE(const s: string): string; // UCS2-LE 2byte little endian without BOM
 function UTF8ToUCS2BE(const s: string): string; // UCS2-BE 2byte big endian without BOM
 
-{$IFnDEF DisableAsianCodePages}
+{$IFnDEF encconv_noasian}
 function CP932ToUTF8(const s: string): string; // Japanese
 function CP936ToUTF8(const s: string): string; // Chinese
 function CP949ToUTF8(const s: string): string; // Korea
@@ -176,7 +176,7 @@ var
 
 implementation
 
-{$IFnDEF DisableAsianCodePages}
+{$IFnDEF encconv_noasian}
 {$include encconv_asiancodepages.inc}
 {$include encconv_asiancodepagefunctions.inc}
 {$ENDIF}
@@ -209,7 +209,7 @@ const
     @CP852ToUTF8,
     @CP866ToUTF8,
     @CP874ToUTF8,
-    {$IFnDEF DisableAsianCodePages}
+    {$IFnDEF encconv_noasian}
     @CP932ToUTF8,
     @CP936ToUTF8,
     @CP949ToUTF8,
@@ -241,7 +241,7 @@ const
     @UTF8ToCP852,
     @UTF8ToCP866,
     @UTF8ToCP874,
-    {$IFnDEF DisableAsianCodePages}
+    {$IFnDEF encconv_noasian}
     @UTF8ToCP932,
     @UTF8ToCP936,
     @UTF8ToCP949,
