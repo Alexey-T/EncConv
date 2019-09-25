@@ -13,6 +13,9 @@ interface
 {.$Define encconv_noasian}
 
 uses
+  {$ifdef windows}
+  Windows,
+  {$endif}
   SysUtils, Classes, LazUTF8;
 
 type
@@ -173,6 +176,10 @@ type
 
 var
   EncConvErrorMode: TEncConvErrorMode = eemReplace;
+
+function EncConvGetANSI: TEncConvId;
+function EncConvGetOEM: TEncConvId;
+
 
 implementation
 
@@ -710,5 +717,52 @@ function EncConvertToUTF8(const S: string; Enc: TEncConvId): string;
 begin
   Result:= FunctionsToUTF8[Enc](S);
 end;
+
+
+function EncConvGetANSI: TEncConvId;
+begin
+  {$ifdef windows}
+  case Windows.GetACP of
+    1250: Result:= eidCP1250;
+    1251: Result:= eidCP1251;
+    1252: Result:= eidCP1252;
+    1253: Result:= eidCP1253;
+    1254: Result:= eidCP1254;
+    1255: Result:= eidCP1255;
+    1256: Result:= eidCP1256;
+    1257: Result:= eidCP1257;
+    1258: Result:= eidCP1258;
+    874: Result:= eidCP874;
+    932: Result:= eidCP932;
+    936: Result:= eidCP936;
+    949: Result:= eidCP949;
+    950: Result:= eidCP950;
+    else Result:= eidCP1252;
+  end;
+  {$else}
+  Result:= eidCP1252;
+  {$endif}
+end;
+
+function EncConvGetOEM: TEncConvId;
+begin
+  {$ifdef windows}
+  case Windows.GetOEMCP of
+    437: Result:= eidCP437;
+    850: Result:= eidCP850;
+    852: Result:= eidCP852;
+    866: Result:= eidCP866;
+    874: Result:= eidCP874;
+    932: Result:= eidCP932;
+    936: Result:= eidCP936;
+    949: Result:= eidCP949;
+    950: Result:= eidCP950;
+    else Result:= eidCP437;
+  end;
+  {$else}
+  Result:= eidCP437;
+  {$endif}
+end;
+
 
 end.
