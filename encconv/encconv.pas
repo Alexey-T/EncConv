@@ -104,68 +104,6 @@ type
   TEncConvUnicodeToCharID = function(Unicode: cardinal): integer;
   TEncConvStringFunction = function(const S: string): string;
 
-function UTF8BOMToUTF8(const s: string): string; inline; // UTF8 with BOM
-function ISO_8859_1ToUTF8(const s: string): string; inline; // central europe
-function ISO_8859_15ToUTF8(const s: string): string; inline; // Western European languages
-function ISO_8859_2ToUTF8(const s: string): string; inline; // eastern europe
-function CP1250ToUTF8(const s: string): string; inline; // central europe
-function CP1251ToUTF8(const s: string): string; inline; // cyrillic
-function CP1252ToUTF8(const s: string): string; inline; // latin 1
-function CP1253ToUTF8(const s: string): string; inline; // greek
-function CP1254ToUTF8(const s: string): string; inline; // turkish
-function CP1255ToUTF8(const s: string): string; inline; // hebrew
-function CP1256ToUTF8(const s: string): string; inline; // arabic
-function CP1257ToUTF8(const s: string): string; inline; // baltic
-function CP1258ToUTF8(const s: string): string; inline; // vietnam
-function CP437ToUTF8(const s: string): string;  inline; // DOS central europe
-function CP850ToUTF8(const s: string): string;  inline; // DOS western europe
-function CP852ToUTF8(const s: string): string;  inline; // DOS central europe
-function CP866ToUTF8(const s: string): string;  inline; // DOS and Windows console's cyrillic
-function CP874ToUTF8(const s: string): string;  inline; // thai
-function KOI8ToUTF8(const s: string): string;  inline; // russian cyrillic
-function MacintoshToUTF8(const s: string): string;  inline; // Macintosh, alias Mac OS Roman
-
-function UCS2LEToUTF8(const s: string): string; // UCS2-LE 2byte little endian
-function UCS2BEToUTF8(const s: string): string; // UCS2-BE 2byte big endian
-
-function UTF8ToUTF8BOM(const s: string): string; inline;// UTF8 with BOM
-function UTF8ToISO_8859_1(const s: string): string; inline;// central europe
-function UTF8ToISO_8859_2(const s: string): string; inline;// eastern europe
-function UTF8ToISO_8859_15(const s: string): string; inline;// Western European languages
-function UTF8ToCP1250(const s: string): string; inline;// central europe
-function UTF8ToCP1251(const s: string): string; inline;// cyrillic
-function UTF8ToCP1252(const s: string): string; inline;// latin 1
-function UTF8ToCP1253(const s: string): string; inline;// greek
-function UTF8ToCP1254(const s: string): string; inline;// turkish
-function UTF8ToCP1255(const s: string): string; inline;// hebrew
-function UTF8ToCP1256(const s: string): string; inline;// arabic
-function UTF8ToCP1257(const s: string): string; inline;// baltic
-function UTF8ToCP1258(const s: string): string; inline;// vietnam
-function UTF8ToCP437(const s: string): string; inline; // DOS central europe
-function UTF8ToCP850(const s: string): string; inline; // DOS western europe
-function UTF8ToCP852(const s: string): string; inline; // DOS central europe
-function UTF8ToCP866(const s: string): string; inline; // DOS and Windows console's cyrillic
-function UTF8ToCP874(const s: string): string; inline; // thai
-function UTF8ToKOI8(const s: string): string; inline; // russian cyrillic
-function UTF8ToKOI8U(const s: string): string; inline; // ukrainian cyrillic
-function UTF8ToKOI8RU(const s: string): string; inline; // belarussian cyrillic
-function UTF8ToMacintosh(const s: string): string; inline; // Macintosh, alias Mac OS Roman
-
-function UTF8ToUCS2LE(const s: string): string; // UCS2-LE 2byte little endian without BOM
-function UTF8ToUCS2BE(const s: string): string; // UCS2-BE 2byte big endian without BOM
-
-{$IFnDEF encconv_noasian}
-function CP932ToUTF8(const s: string): string; // Japanese
-function CP936ToUTF8(const s: string): string; // Chinese
-function CP949ToUTF8(const s: string): string; // Korea
-function CP950ToUTF8(const s: string): string; // Chinese Complex
-
-function UTF8ToCP932(const s: string): string; // Japanese
-function UTF8ToCP936(const s: string): string; // Chinese, essentially the same as GB 2312 and a predecessor to GB 18030
-function UTF8ToCP949(const s: string): string; // Korea
-function UTF8ToCP950(const s: string): string; // Chinese Complex
-{$ENDIF}
-
 type
   TEncConvErrorMode = (
     eemSkip,
@@ -195,71 +133,6 @@ function StrNone(const S: string): string;
 begin
   Result:= S;
 end;
-
-const
-  FunctionsToUTF8: array[TEncConvId] of TEncConvStringFunction = (
-    @StrNone,
-    @UTF8BOMToUTF8,
-    @UCS2LEToUTF8,
-    @UCS2BEToUTF8,
-    @CP1250ToUTF8,
-    @CP1251ToUTF8,
-    @CP1252ToUTF8,
-    @CP1253ToUTF8,
-    @CP1254ToUTF8,
-    @CP1255ToUTF8,
-    @CP1256ToUTF8,
-    @CP1257ToUTF8,
-    @CP1258ToUTF8,
-    @CP437ToUTF8,
-    @CP850ToUTF8,
-    @CP852ToUTF8,
-    @CP866ToUTF8,
-    @CP874ToUTF8,
-    {$IFnDEF encconv_noasian}
-    @CP932ToUTF8,
-    @CP936ToUTF8,
-    @CP949ToUTF8,
-    @CP950ToUTF8,
-    {$ENDIF}
-    @ISO_8859_1ToUTF8,
-    @ISO_8859_2ToUTF8,
-    @ISO_8859_15ToUTF8,
-    @MacintoshToUTF8,
-    @KOI8ToUTF8
-  );
-
-  FunctionsFromUTF8: array[TEncConvId] of TEncConvStringFunction = (
-    @StrNone,
-    @UTF8ToUTF8BOM,
-    @UTF8ToUCS2LE,
-    @UTF8ToUCS2BE,
-    @UTF8ToCP1250,
-    @UTF8ToCP1251,
-    @UTF8ToCP1252,
-    @UTF8ToCP1253,
-    @UTF8ToCP1254,
-    @UTF8ToCP1255,
-    @UTF8ToCP1256,
-    @UTF8ToCP1257,
-    @UTF8ToCP1258,
-    @UTF8ToCP437,
-    @UTF8ToCP850,
-    @UTF8ToCP852,
-    @UTF8ToCP866,
-    @UTF8ToCP874,
-    {$IFnDEF encconv_noasian}
-    @UTF8ToCP932,
-    @UTF8ToCP936,
-    @UTF8ToCP949,
-    @UTF8ToCP950,
-    {$ENDIF}
-    @UTF8ToISO_8859_1,
-    @UTF8ToISO_8859_2,
-    @UTF8ToISO_8859_15,
-    @UTF8ToMacintosh,
-    @UTF8ToKOI8
-  );
 
 function SingleByteToUTF8(const s: string; const Table: TEncConvTable): string;
 forward;
@@ -708,6 +581,72 @@ begin
   Result:= eidUTF8;
 end;
 
+const
+  FunctionsToUTF8: array[TEncConvId] of TEncConvStringFunction = (
+    @StrNone,
+    @UTF8BOMToUTF8,
+    @UCS2LEToUTF8,
+    @UCS2BEToUTF8,
+    @CP1250ToUTF8,
+    @CP1251ToUTF8,
+    @CP1252ToUTF8,
+    @CP1253ToUTF8,
+    @CP1254ToUTF8,
+    @CP1255ToUTF8,
+    @CP1256ToUTF8,
+    @CP1257ToUTF8,
+    @CP1258ToUTF8,
+    @CP437ToUTF8,
+    @CP850ToUTF8,
+    @CP852ToUTF8,
+    @CP866ToUTF8,
+    @CP874ToUTF8,
+    {$IFnDEF encconv_noasian}
+    @CP932ToUTF8,
+    @CP936ToUTF8,
+    @CP949ToUTF8,
+    @CP950ToUTF8,
+    {$ENDIF}
+    @ISO_8859_1ToUTF8,
+    @ISO_8859_2ToUTF8,
+    @ISO_8859_15ToUTF8,
+    @MacintoshToUTF8,
+    @KOI8ToUTF8
+  );
+
+  FunctionsFromUTF8: array[TEncConvId] of TEncConvStringFunction = (
+    @StrNone,
+    @UTF8ToUTF8BOM,
+    @UTF8ToUCS2LE,
+    @UTF8ToUCS2BE,
+    @UTF8ToCP1250,
+    @UTF8ToCP1251,
+    @UTF8ToCP1252,
+    @UTF8ToCP1253,
+    @UTF8ToCP1254,
+    @UTF8ToCP1255,
+    @UTF8ToCP1256,
+    @UTF8ToCP1257,
+    @UTF8ToCP1258,
+    @UTF8ToCP437,
+    @UTF8ToCP850,
+    @UTF8ToCP852,
+    @UTF8ToCP866,
+    @UTF8ToCP874,
+    {$IFnDEF encconv_noasian}
+    @UTF8ToCP932,
+    @UTF8ToCP936,
+    @UTF8ToCP949,
+    @UTF8ToCP950,
+    {$ENDIF}
+    @UTF8ToISO_8859_1,
+    @UTF8ToISO_8859_2,
+    @UTF8ToISO_8859_15,
+    @UTF8ToMacintosh,
+    @UTF8ToKOI8
+  );
+
+
 function EncConvertFromUTF8(const S: string; Enc: TEncConvId): string;
 begin
   Result:= FunctionsFromUTF8[Enc](S);
@@ -719,9 +658,15 @@ begin
 end;
 
 
+var
+  _SavedANSI: TEncConvId = eidUTF8;
+  _SavedOEM: TEncConvId = eidUTF8;
+
 function EncConvGetANSI: TEncConvId;
 begin
   {$ifdef windows}
+  if _SavedANSI<>eidUTF8 then
+    exit(_SavedANSI);
   case Windows.GetACP of
     1250: Result:= eidCP1250;
     1251: Result:= eidCP1251;
@@ -739,6 +684,7 @@ begin
     950: Result:= eidCP950;
     else Result:= eidCP1252;
   end;
+  _SavedANSI:= Result;
   {$else}
   Result:= eidCP1252;
   {$endif}
@@ -747,6 +693,8 @@ end;
 function EncConvGetOEM: TEncConvId;
 begin
   {$ifdef windows}
+  if _SavedOEM<>eidUTF8 then
+    exit(_SavedOEM);
   case Windows.GetOEMCP of
     437: Result:= eidCP437;
     850: Result:= eidCP850;
@@ -759,6 +707,7 @@ begin
     950: Result:= eidCP950;
     else Result:= eidCP437;
   end;
+  _SavedOEM:= Result;
   {$else}
   Result:= eidCP437;
   {$endif}
