@@ -2,7 +2,6 @@
 <CONFIG>
   <Package Version="4">
     <Name Value="encconv_package"/>
-    <Type Value="RunTimeOnly"/>
     <Author Value="Alexey Torgashin"/>
     <CompilerOptions>
       <Version Value="11"/>
