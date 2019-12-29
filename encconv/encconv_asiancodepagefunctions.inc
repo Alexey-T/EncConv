@@ -37,11 +37,10 @@ begin
       Inc(Src);
 
       code := ArrayUni[SearchTable(ArrayCP, code)];
-      if code>0 then
-      begin
-        l:=UnicodeToUTF8Inline(code,Dest);
-        inc(Dest,l);
-      end;
+      if code = 0 then
+        code := Ord('?'); // support chars not present in codepage
+      l:=UnicodeToUTF8Inline(code,Dest);
+      inc(Dest,l);
     end;
   until false;
   SetLength(Result, {%H-}PtrUInt(Dest) - PtrUInt(Result));
