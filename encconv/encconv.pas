@@ -658,9 +658,11 @@ begin
 end;
 
 
+{$ifdef windows}
 var
   _SavedANSI: TEncConvId = eidUTF8;
   _SavedOEM: TEncConvId = eidUTF8;
+{$endif}
 
 function EncConvGetANSI: TEncConvId;
 begin
