@@ -53,7 +53,9 @@ type
     eidISO15,
 
     eidCPMac,
-    eidCPKOI8
+    eidKOI8R,
+    eidKOI8U,
+    eidKOI8RU
     );
 
 const
@@ -91,7 +93,9 @@ const
     'iso885915',
 
     'mac',
-    'koi8'
+    'koi8r',
+    'koi8u',
+    'koi8ru'
     );
 
 function EncConvFindEncoding(const s: string): TEncConvId;
@@ -229,9 +233,19 @@ begin
   Result:=SingleByteToUTF8(s,ArrayCP874ToUTF8);
 end;
 
-function KOI8ToUTF8(const s: string): string;
+function KOI8RToUTF8(const s: string): string;
 begin
-  Result:=SingleByteToUTF8(s,ArrayKOI8ToUTF8);
+  Result:=SingleByteToUTF8(s,ArrayKOI8RToUTF8);
+end;
+
+function KOI8UToUTF8(const s: string): string;
+begin
+  Result:=SingleByteToUTF8(s,ArrayKOI8UToUTF8);
+end;
+
+function KOI8RUToUTF8(const s: string): string;
+begin
+  Result:=SingleByteToUTF8(s,ArrayKOI8RUToUTF8);
 end;
 
 function MacintoshToUTF8(const s: string): string;
@@ -425,9 +439,9 @@ begin
   Result:=UTF8ToSingleByte(s,@UnicodeToCP874);
 end;
 
-function UTF8ToKOI8(const s: string): string;
+function UTF8ToKOI8R(const s: string): string;
 begin
-  Result:=UTF8ToSingleByte(s,@UnicodeToKOI8);
+  Result:=UTF8ToSingleByte(s,@UnicodeToKOI8R);
 end;
 
 function UTF8ToKOI8U(const s: string): string;
@@ -611,7 +625,9 @@ const
     @ISO_8859_2ToUTF8,
     @ISO_8859_15ToUTF8,
     @MacintoshToUTF8,
-    @KOI8ToUTF8
+    @KOI8RToUTF8,
+    @KOI8UToUTF8,
+    @KOI8RUToUTF8
   );
 
   FunctionsFromUTF8: array[TEncConvId] of TEncConvStringFunction = (
@@ -643,7 +659,9 @@ const
     @UTF8ToISO_8859_2,
     @UTF8ToISO_8859_15,
     @UTF8ToMacintosh,
-    @UTF8ToKOI8
+    @UTF8ToKOI8R,
+    @UTF8ToKOI8U,
+    @UTF8ToKOI8RU
   );
 
 

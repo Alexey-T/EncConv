@@ -517,10 +517,17 @@ begin
   end;
 end;
 
-function UnicodeToKOI8(Unicode: cardinal): integer;
+function UnicodeToKOI8R(Unicode: cardinal): integer;
 begin
   case Unicode of
   0..127: Result:=Unicode;
+  160: Result:=154;
+  169: Result:=191;
+  176: Result:=156;
+  178: Result:=157;
+  183: Result:=158;
+  247: Result:=159;
+  1025: Result:=179;
   1040..1041: Result:=Unicode-815;
   1042: Result:=247;
   1043: Result:=231;
@@ -535,6 +542,7 @@ begin
   1063: Result:=254;
   1064: Result:=251;
   1065: Result:=253;
+  1066: Result:=255;
   1067: Result:=249;
   1068: Result:=248;
   1069: Result:=252;
@@ -560,6 +568,34 @@ begin
   1101: Result:=220;
   1102: Result:=192;
   1103: Result:=209;
+  1105: Result:=163;
+  8729: Result:=149;
+  8730: Result:=150;
+  8776: Result:=151;
+  8804: Result:=152;
+  8805: Result:=153;
+  8992: Result:=147;
+  8993: Result:=155;
+  9472: Result:=128;
+  9474: Result:=129;
+  9484: Result:=130;
+  9488: Result:=131;
+  9492: Result:=132;
+  9496: Result:=133;
+  9500: Result:=134;
+  9508: Result:=135;
+  9516: Result:=136;
+  9524: Result:=137;
+  9532: Result:=138;
+  9552..9554: Result:=Unicode-9392;
+  9555..9569: Result:=Unicode-9391;
+  9570..9580: Result:=Unicode-9390;
+  9600: Result:=139;
+  9604: Result:=140;
+  9608: Result:=141;
+  9612: Result:=142;
+  9616..9619: Result:=Unicode-9473;
+  9632: Result:=148;
   else Result:=-1;
   end;
 end;
@@ -567,24 +603,31 @@ end;
 function UnicodeToKOI8U(Unicode: cardinal): integer;
 begin
   case Unicode of
-  1025: Result:=179;
   1028: Result:=180;
   1030..1031: Result:=Unicode-848;
-  1105: Result:=163;
   1108: Result:=164;
   1110..1111: Result:=Unicode-944;
   1168: Result:=189;
   1169: Result:=173;
   else
-    Result:=UnicodeToKOI8(Unicode);
+    Result:=UnicodeToKOI8R(Unicode);
   end;
 end;
 
 function UnicodeToKOI8RU(Unicode: cardinal): integer;
 begin
   case Unicode of
+  164 : Result:=159;
+  171 : Result:=157;
+  174 : Result:=156;
+  187 : Result:=155;
   1038: Result:=190;
   1118: Result:=174;
+  8212: Result:=151;
+  8220: Result:=147;
+  8221: Result:=150;
+  8470: Result:=152;
+  8482: Result:=153;
   else
     Result:=UnicodeToKOI8U(Unicode);
   end;
