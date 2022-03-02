@@ -50,6 +50,7 @@ type
 
     eidISO1,
     eidISO2,
+    eidISO9,
     eidISO15,
 
     eidCPMac,
@@ -90,6 +91,7 @@ const
 
     'iso88591',
     'iso88592',
+    'iso88599',
     'iso885915',
 
     'mac',
@@ -151,6 +153,11 @@ end;
 function ISO_8859_1ToUTF8(const s: string): string;
 begin
   Result:=SingleByteToUTF8(s,ArrayISO_8859_1ToUTF8);
+end;
+
+function ISO_8859_9ToUTF8(const s: string): string;
+begin
+  Result:=SingleByteToUTF8(s,ArrayISO_8859_9ToUTF8);
 end;
 
 function ISO_8859_15ToUTF8(const s: string): string;
@@ -357,6 +364,11 @@ end;
 function UTF8ToISO_8859_1(const s: string): string;
 begin
   Result:=UTF8ToSingleByte(s,@UnicodeToISO_8859_1);
+end;
+
+function UTF8ToISO_8859_9(const s: string): string;
+begin
+  Result:=UTF8ToSingleByte(s,@UnicodeToISO_8859_9);
 end;
 
 function UTF8ToISO_8859_15(const s: string): string;
@@ -623,6 +635,7 @@ const
     {$ENDIF}
     @ISO_8859_1ToUTF8,
     @ISO_8859_2ToUTF8,
+    @ISO_8859_9ToUTF8,
     @ISO_8859_15ToUTF8,
     @MacintoshToUTF8,
     @KOI8RToUTF8,
@@ -657,6 +670,7 @@ const
     {$ENDIF}
     @UTF8ToISO_8859_1,
     @UTF8ToISO_8859_2,
+    @UTF8ToISO_8859_9,
     @UTF8ToISO_8859_15,
     @UTF8ToMacintosh,
     @UTF8ToKOI8R,

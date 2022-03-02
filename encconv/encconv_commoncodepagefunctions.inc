@@ -641,6 +641,20 @@ begin
   end;
 end;
 
+function UnicodeToISO_8859_9(Unicode: cardinal): integer;
+begin
+  case Unicode of
+  0..255: Result:=Unicode;
+  $011E: Result:= $D0;
+  $0130: Result:= $DD;
+  $015E: Result:= $DE;
+  $011F: Result:= $F0;
+  $0131: Result:= $FD;
+  $015F: Result:= $FE;
+  else Result:=-1;
+  end;
+end;
+
 function UnicodeToISO_8859_15(Unicode: cardinal): integer;
 begin
   case Unicode of
