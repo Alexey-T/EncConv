@@ -160,6 +160,11 @@ begin
   Result:=SingleByteToUTF8(s,ArrayISO_8859_9ToUTF8);
 end;
 
+function ISO_8859_14ToUTF8(const s: string): string;
+begin
+  Result:=SingleByteToUTF8(s,ArrayISO_8859_14ToUTF8);
+end;
+
 function ISO_8859_15ToUTF8(const s: string): string;
 begin
   Result:=SingleByteToUTF8(s,ArrayISO_8859_15ToUTF8);
