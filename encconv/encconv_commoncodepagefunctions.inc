@@ -655,6 +655,59 @@ begin
   end;
 end;
 
+function UnicodeToISO_8859_14(Unicode: cardinal): integer;
+begin
+  case Unicode of
+  0..$A0: Result:=Unicode;
+  $A3,
+  $A7,
+  $A9,
+  $AD,
+  $AE,
+  $B6: Result:= Unicode;
+  $1E02: Result:= $A1;
+  $1E03: Result:= $A2;
+  $10A: Result:= $A4;
+  $10B: Result:= $A5;
+  $1E0A: Result:= $A6;
+  $1E80: Result:= $A8;
+  $1E82: Result:= $AA;
+  $1E0B: Result:= $AB;
+  $1EF2: Result:= $AC;
+  $178: Result:= $AF;
+  $1E1E: Result:= $B0;
+  $1E1F: Result:= $B1;
+  $120: Result:= $B2;
+  $121: Result:= $B3;
+  $1E40: Result:= $B4;
+  $1E41: Result:= $B5;
+  $1E56: Result:= $B7;
+  $1E81: Result:= $B8;
+  $1E57: Result:= $B9;
+  $1E83: Result:= $BA;
+  $1E60: Result:= $BB;
+  $1EF3: Result:= $BC;
+  $1E84: Result:= $BD;
+  $1E85: Result:= $BE;
+  $1E61: Result:= $BF;
+  $C0..$CF: Result:= Unicode;
+  $174: Result:= $D0;
+  $D1..$D6: Result:= Unicode;
+  $1E6A: Result:= $D7;
+  $D8..$DD: Result:= Unicode;
+  $176: Result:= $DE;
+  $DF..$EF: Result:= Unicode;
+  $175: Result:= $F0;
+  $F1..$F6: Result:= Unicode;
+  $1E6B: Result:= $F7;
+  $F8..$FD: Result:= Unicode;
+  $177: Result:= $FE;
+  $FF: Result:= $FF;
+  else Result:=-1;
+  end;
+end;
+
+
 function UnicodeToISO_8859_15(Unicode: cardinal): integer;
 begin
   case Unicode of
