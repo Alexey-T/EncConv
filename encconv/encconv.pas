@@ -53,6 +53,7 @@ type
     eidISO9,
     eidISO14,
     eidISO15,
+    eidISO16,
 
     eidCPMac,
     eidKOI8R,
@@ -95,6 +96,7 @@ const
     'iso-8859-9',
     'iso-8859-14',
     'iso-8859-15',
+    'iso-8859-16',
 
     'mac',
     'koi8r',
@@ -157,6 +159,11 @@ begin
   Result:=SingleByteToUTF8(s,ArrayISO_8859_1ToUTF8);
 end;
 
+function ISO_8859_2ToUTF8(const s: string): string;
+begin
+  Result:=SingleByteToUTF8(s,ArrayISO_8859_2ToUTF8);
+end;
+
 function ISO_8859_9ToUTF8(const s: string): string;
 begin
   Result:=SingleByteToUTF8(s,ArrayISO_8859_9ToUTF8);
@@ -172,9 +179,9 @@ begin
   Result:=SingleByteToUTF8(s,ArrayISO_8859_15ToUTF8);
 end;
 
-function ISO_8859_2ToUTF8(const s: string): string;
+function ISO_8859_16ToUTF8(const s: string): string;
 begin
-  Result:=SingleByteToUTF8(s,ArrayISO_8859_2ToUTF8);
+  Result:=SingleByteToUTF8(s,ArrayISO_8859_16ToUTF8);
 end;
 
 function CP1250ToUTF8(const s: string): string;
@@ -373,6 +380,11 @@ begin
   Result:=UTF8ToSingleByte(s,@UnicodeToISO_8859_1);
 end;
 
+function UTF8ToISO_8859_2(const s: string): string;
+begin
+  Result:=UTF8ToSingleByte(s,@UnicodeToISO_8859_2);
+end;
+
 function UTF8ToISO_8859_9(const s: string): string;
 begin
   Result:=UTF8ToSingleByte(s,@UnicodeToISO_8859_9);
@@ -388,9 +400,9 @@ begin
   Result:=UTF8ToSingleByte(s,@UnicodeToISO_8859_15);
 end;
 
-function UTF8ToISO_8859_2(const s: string): string;
+function UTF8ToISO_8859_16(const s: string): string;
 begin
-  Result:=UTF8ToSingleByte(s,@UnicodeToISO_8859_2);
+  Result:=UTF8ToSingleByte(s,@UnicodeToISO_8859_16);
 end;
 
 function UTF8ToCP1250(const s: string): string;
@@ -650,6 +662,7 @@ const
     @ISO_8859_9ToUTF8,
     @ISO_8859_14ToUTF8,
     @ISO_8859_15ToUTF8,
+    @ISO_8859_16ToUTF8,
     @MacintoshToUTF8,
     @KOI8RToUTF8,
     @KOI8UToUTF8,
@@ -686,6 +699,7 @@ const
     @UTF8ToISO_8859_9,
     @UTF8ToISO_8859_14,
     @UTF8ToISO_8859_15,
+    @UTF8ToISO_8859_16,
     @UTF8ToMacintosh,
     @UTF8ToKOI8R,
     @UTF8ToKOI8U,
