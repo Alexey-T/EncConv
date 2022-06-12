@@ -865,6 +865,21 @@ begin
   end;
 end;
 
+function UnicodeToISO_8859_5(Unicode: cardinal): integer;
+begin
+  case Unicode of
+    0..$A6,
+    $A8..$FF: Result:= Unicode;
+    $401..$40C,
+    $40E..$44F: Result:= Unicode-($401-$A1);
+    $2116: Result:= $F0;
+    $451..$45C,
+    $45E..$45F: Result:= Unicode-($451-$F1);
+    $A7: Result:= $FD;
+    else Result:= -1;
+  end;
+end;
+
 function UnicodeToMacintosh(Unicode: cardinal): integer;
 begin
   case Unicode of

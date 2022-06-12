@@ -50,6 +50,7 @@ type
 
     eidISO1,
     eidISO2,
+    eidISO5,
     eidISO9,
     eidISO14,
     eidISO15,
@@ -93,6 +94,7 @@ const
 
     'iso-8859-1',
     'iso-8859-2',
+    'iso-8859-5',
     'iso-8859-9',
     'iso-8859-14',
     'iso-8859-15',
@@ -162,6 +164,11 @@ end;
 function ISO_8859_2ToUTF8(const s: string): string;
 begin
   Result:=SingleByteToUTF8(s,ArrayISO_8859_2ToUTF8);
+end;
+
+function ISO_8859_5ToUTF8(const s: string): string;
+begin
+  Result:=SingleByteToUTF8(s,ArrayISO_8859_5ToUTF8);
 end;
 
 function ISO_8859_9ToUTF8(const s: string): string;
@@ -383,6 +390,11 @@ end;
 function UTF8ToISO_8859_2(const s: string): string;
 begin
   Result:=UTF8ToSingleByte(s,@UnicodeToISO_8859_2);
+end;
+
+function UTF8ToISO_8859_5(const s: string): string;
+begin
+  Result:=UTF8ToSingleByte(s,@UnicodeToISO_8859_5);
 end;
 
 function UTF8ToISO_8859_9(const s: string): string;
@@ -659,6 +671,7 @@ const
     {$ENDIF}
     @ISO_8859_1ToUTF8,
     @ISO_8859_2ToUTF8,
+    @ISO_8859_5ToUTF8,
     @ISO_8859_9ToUTF8,
     @ISO_8859_14ToUTF8,
     @ISO_8859_15ToUTF8,
@@ -696,6 +709,7 @@ const
     {$ENDIF}
     @UTF8ToISO_8859_1,
     @UTF8ToISO_8859_2,
+    @UTF8ToISO_8859_5,
     @UTF8ToISO_8859_9,
     @UTF8ToISO_8859_14,
     @UTF8ToISO_8859_15,
