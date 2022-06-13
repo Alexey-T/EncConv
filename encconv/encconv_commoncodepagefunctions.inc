@@ -724,6 +724,54 @@ begin
   end;
 end;
 
+function UnicodeToISO_8859_16(Unicode: cardinal): integer;
+begin
+  case Unicode of
+    0..255: Result:=Unicode;
+    $104: Result:= $A1;
+    $105: Result:= $A2;
+    $141: Result:= $A3;
+    $20AC: Result:= $A4;
+    $201E: Result:= $A5;
+    $160: Result:= $A6;
+    $161: Result:= $A8;
+    $218: Result:= $AA;
+    $179: Result:= $AC;
+    $17A: Result:= $AE;
+    $17B: Result:= $AF;
+    $10C: Result:= $B2;
+    $142: Result:= $B3;
+    $17D: Result:= $B4;
+    $201D: Result:= $B5;
+    $17E: Result:= $B8;
+    $10D: Result:= $B9;
+    $219: Result:= $BA;
+    $152: Result:= $BC;
+    $153: Result:= $BD;
+    $178: Result:= $BE;
+    $17C: Result:= $BF;
+    $102: Result:= $C3;
+    $106: Result:= $C5;
+    $110: Result:= $D0;
+    $143: Result:= $D1;
+    $150: Result:= $D5;
+    $15A: Result:= $D7;
+    $170: Result:= $D8;
+    $118: Result:= $DD;
+    $21A: Result:= $DE;
+    $103: Result:= $E3;
+    $107: Result:= $E5;
+    $111: Result:= $F0;
+    $144: Result:= $F1;
+    $151: Result:= $F5;
+    $15B: Result:= $F7;
+    $171: Result:= $F8;
+    $119: Result:= $FD;
+    $21B: Result:= $FE;
+    else Result:=-1;
+  end;
+end;
+
 function UnicodeToISO_8859_2(Unicode: cardinal): integer;
 begin
   case Unicode of
@@ -814,6 +862,21 @@ begin
   731: Result:=178;
   733: Result:=189;
   else Result:=-1;
+  end;
+end;
+
+function UnicodeToISO_8859_5(Unicode: cardinal): integer;
+begin
+  case Unicode of
+    0..$A6,
+    $A8..$FF: Result:= Unicode;
+    $401..$40C,
+    $40E..$44F: Result:= Unicode-($401-$A1);
+    $2116: Result:= $F0;
+    $451..$45C,
+    $45E..$45F: Result:= Unicode-($451-$F1);
+    $A7: Result:= $FD;
+    else Result:= -1;
   end;
 end;
 
