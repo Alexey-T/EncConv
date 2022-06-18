@@ -1004,6 +1004,25 @@ begin
   end;
 end;
 
+function UnicodeToISO_8859_7(Unicode: cardinal): integer;
+begin
+  case Unicode of
+    0..$A0,
+    $A3, $A6..$A9, $AB..$AE,
+    $B0..$B3, $B7, $BB, $BD,
+    $D2, $FF: Result:= Unicode;
+    $2BD: Result:= $A1;
+    $2BC: Result:= $A2;
+    $20AC: Result:= $A4;
+    $20AF: Result:= $A5;
+    $37A: Result:= $AA;
+    $2015: Result:= $AF;
+    $384..$386, $388..$38A, $38C,
+    $38E..$3A1, $3A3..$3CE: Result:= Unicode-($384-$B4);
+    else Result:= -1;
+  end;
+end;
+
 function UnicodeToMacintosh(Unicode: cardinal): integer;
 begin
   case Unicode of
