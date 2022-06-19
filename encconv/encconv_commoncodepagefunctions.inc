@@ -677,6 +677,69 @@ begin
   end;
 end;
 
+function UnicodeToISO_8859_4(Unicode: cardinal): integer;
+begin
+  case Unicode of
+    0..$A0, $A4, $A7, $A8, $AD, $AF,
+    $B0, $B4, $B8,
+    $C1..$C6, $C9, $CB, $CD, $CE,
+    $D4..$D8, $DA..$DC, $DF,
+    $E1..$E6, $E9, $EB, $ED, $EE,
+    $F4..$F9, $FA..$FC: Result:= Unicode;
+    $104: Result:= $A1;
+    $138: Result:= $A2;
+    $156: Result:= $A3;
+    $128: Result:= $A5;
+    $13B: Result:= $A6;
+    $160: Result:= $A9;
+    $112: Result:= $AA;
+    $122: Result:= $AB;
+    $166: Result:= $AC;
+    $17D: Result:= $AE;
+    $105: Result:= $B1;
+    $2DB: Result:= $B2;
+    $157: Result:= $B3;
+    $129: Result:= $B5;
+    $13C: Result:= $B6;
+    $2C7: Result:= $B7;
+    $161: Result:= $B9;
+    $113: Result:= $BA;
+    $123: Result:= $BB;
+    $167: Result:= $BC;
+    $14A: Result:= $BD;
+    $17E: Result:= $BE;
+    $14B: Result:= $BF;
+    $100: Result:= $C0;
+    $12E: Result:= $C7;
+    $10C: Result:= $C8;
+    $118: Result:= $CA;
+    $116: Result:= $CC;
+    $12A: Result:= $CF;
+    $110: Result:= $D0;
+    $145: Result:= $D1;
+    $14C: Result:= $D2;
+    $136: Result:= $D3;
+    $172: Result:= $D9;
+    $168: Result:= $DD;
+    $16A: Result:= $DE;
+    $101: Result:= $E0;
+    $12F: Result:= $E7;
+    $10D: Result:= $E8;
+    $119: Result:= $EA;
+    $117: Result:= $EC;
+    $12B: Result:= $EF;
+    $111: Result:= $F0;
+    $146: Result:= $F1;
+    $14D: Result:= $F2;
+    $137: Result:= $F3;
+    $173: Result:= $F9;
+    $169: Result:= $FD;
+    $16B: Result:= $FE;
+    $2D9: Result:= $FF;
+    else Result:= -1;
+  end;
+end;
+
 function UnicodeToISO_8859_9(Unicode: cardinal): integer;
 begin
   case Unicode of
