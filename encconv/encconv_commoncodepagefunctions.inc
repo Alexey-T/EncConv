@@ -636,8 +636,44 @@ end;
 function UnicodeToISO_8859_1(Unicode: cardinal): integer;
 begin
   case Unicode of
-  0..255: Result:=Unicode;
-  else Result:=-1;
+    0..255: Result:=Unicode;
+    else Result:=-1;
+  end;
+end;
+
+function UnicodeToISO_8859_3(Unicode: cardinal): integer;
+begin
+  case Unicode of
+    0..255: Result:= Unicode;
+    $126: Result:= $A1;
+    $2D8: Result:= $A2;
+    $124: Result:= $A6;
+    $130: Result:= $A9;
+    $15E: Result:= $AA;
+    $11E: Result:= $AB;
+    $134: Result:= $AC;
+    $17B: Result:= $AF;
+    $127: Result:= $B1;
+    $125: Result:= $B6;
+    $131: Result:= $B9;
+    $15F: Result:= $BA;
+    $11F: Result:= $BB;
+    $135: Result:= $BC;
+    $17C: Result:= $BF;
+    $10A: Result:= $C5;
+    $108: Result:= $C6;
+    $120: Result:= $D5;
+    $11C: Result:= $D8;
+    $16C: Result:= $DD;
+    $15C: Result:= $DE;
+    $10B: Result:= $E5;
+    $109: Result:= $E6;
+    $121: Result:= $F5;
+    $11D: Result:= $F8;
+    $16D: Result:= $FD;
+    $15D: Result:= $FE;
+    $2D9: Result:= $FF;
+    else Result:= -1;
   end;
 end;
 
