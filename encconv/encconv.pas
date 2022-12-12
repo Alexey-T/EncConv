@@ -38,6 +38,7 @@ type
     eidCP437,
     eidCP850,
     eidCP852,
+    eidCP865,
     eidCP866,
     eidCP874,
 
@@ -87,6 +88,7 @@ const
     'cp437',
     'cp850',
     'cp852',
+    'cp865',
     'cp866',
     'cp874',
 
@@ -284,6 +286,11 @@ end;
 function CP852ToUTF8(const s: string): string;
 begin
   Result:=SingleByteToUTF8(s,ArrayCP852ToUTF8);
+end;
+
+function CP865ToUTF8(const s: string): string;
+begin
+  Result:=SingleByteToUTF8(s,ArrayCP865ToUTF8);
 end;
 
 function CP866ToUTF8(const s: string): string;
@@ -537,6 +544,11 @@ begin
   Result:=UTF8ToSingleByte(s,@UnicodeToCP852);
 end;
 
+function UTF8ToCP865(const s: string): string;
+begin
+  Result:=UTF8ToSingleByte(s,@UnicodeToCP865);
+end;
+
 function UTF8ToCP866(const s: string): string;
 begin
   Result:=UTF8ToSingleByte(s,@UnicodeToCP866);
@@ -721,6 +733,7 @@ const
     @CP437ToUTF8,
     @CP850ToUTF8,
     @CP852ToUTF8,
+    @CP865ToUTF8,
     @CP866ToUTF8,
     @CP874ToUTF8,
     {$IFnDEF encconv_noasian}
@@ -764,6 +777,7 @@ const
     @UTF8ToCP437,
     @UTF8ToCP850,
     @UTF8ToCP852,
+    @UTF8ToCP865,
     @UTF8ToCP866,
     @UTF8ToCP874,
     {$IFnDEF encconv_noasian}
