@@ -49,6 +49,7 @@ type
     eidCP949,
     eidCP950,
     eidGB2312,
+    eidGB2312_HZ,
     eidGB18030,
     eidISO2022_CHS,
     eidISO2022_CHT,
@@ -107,6 +108,7 @@ const
     'cp949',
     'cp950',
     'gb2312',
+    'gb2312-hz',
     'gb18030',
     'iso-2022-chs',
     'iso-2022-cht',
@@ -168,6 +170,7 @@ implementation
 
 const
   CP_GB2312 = 20936;
+  CP_GB2312_HZ = 52936;
   CP_GB18030 = 54936;
   CP_ISO2022_CHS = 50227;
   CP_ISO2022_CHT = 50229;
@@ -635,6 +638,11 @@ begin
   Result:=StrUTF8ToEnc(S, CP_GB2312);
 end;
 
+function UTF8ToGB2312HZ(const S: string): string;
+begin
+  Result:=StrUTF8ToEnc(S, CP_GB2312_HZ);
+end;
+
 function UTF8ToGB18030(const S: string): string;
 begin
   Result:=StrUTF8ToEnc(S, CP_GB18030);
@@ -653,6 +661,11 @@ end;
 function GB2312ToUTF8(const S: string): string;
 begin
   Result:=StrEncToUTF8(S, CP_GB2312);
+end;
+
+function GB2312HZToUTF8(const S: string): string;
+begin
+  Result:=StrEncToUTF8(S, CP_GB2312_HZ);
 end;
 
 function GB18030ToUTF8(const S: string): string;
@@ -834,6 +847,7 @@ const
     @CP949ToUTF8,
     @CP950ToUTF8,
     @GB2312ToUTF8,
+    @GB2312HZToUTF8,
     @GB18030ToUTF8,
     @ISO2022CHSToUTF8,
     @ISO2022CHTToUTF8,
@@ -883,6 +897,7 @@ const
     @UTF8ToCP949,
     @UTF8ToCP950,
     @UTF8ToGB2312,
+    @UTF8ToGB2312HZ,
     @UTF8ToGB18030,
     @UTF8ToISO2022CHS,
     @UTF8ToISO2022CHT,
