@@ -48,6 +48,7 @@ type
     eidCP936,
     eidCP949,
     eidCP950,
+    eidGB2312,
     eidGB18030,
     {$ENDIF}
 
@@ -103,6 +104,7 @@ const
     'cp936',
     'cp949',
     'cp950',
+    'gb2312',
     'gb18030',
     {$ENDIF}
 
@@ -161,6 +163,7 @@ implementation
 {$include encconv_commoncodepagefunctions.inc}
 
 const
+  CP_GB2312 = 20936;
   CP_GB18030 = 54936;
 
 function StrUTF8ToEnc(const S: string; Enc: TSystemCodePage): string;
@@ -621,9 +624,19 @@ begin
   Result:=UTF8ToSingleByte(s,@UnicodeToMacintosh);
 end;
 
+function UTF8ToGB2312(const S: string): string;
+begin
+  Result:=StrUTF8ToEnc(S, CP_GB2312);
+end;
+
 function UTF8ToGB18030(const S: string): string;
 begin
   Result:=StrUTF8ToEnc(S, CP_GB18030);
+end;
+
+function GB2312ToUTF8(const S: string): string;
+begin
+  Result:=StrEncToUTF8(S, CP_GB2312);
 end;
 
 function GB18030ToUTF8(const S: string): string;
@@ -794,6 +807,7 @@ const
     @CP936ToUTF8,
     @CP949ToUTF8,
     @CP950ToUTF8,
+    @GB2312ToUTF8,
     @GB18030ToUTF8,
     {$ENDIF}
     @ISO_8859_1ToUTF8,
@@ -840,6 +854,7 @@ const
     @UTF8ToCP936,
     @UTF8ToCP949,
     @UTF8ToCP950,
+    @UTF8ToGB2312,
     @UTF8ToGB18030,
     {$ENDIF}
     @UTF8ToISO_8859_1,
