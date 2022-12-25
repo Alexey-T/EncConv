@@ -50,6 +50,8 @@ type
     eidCP950,
     eidGB2312,
     eidGB18030,
+    eidISO2022_CHS,
+    eidISO2022_CHT,
     {$ENDIF}
 
     eidISO1,
@@ -106,6 +108,8 @@ const
     'cp950',
     'gb2312',
     'gb18030',
+    'iso-2022-chs',
+    'iso-2022-cht',
     {$ENDIF}
 
     'iso-8859-1',
@@ -165,6 +169,8 @@ implementation
 const
   CP_GB2312 = 20936;
   CP_GB18030 = 54936;
+  CP_ISO2022_CHS = 50227;
+  CP_ISO2022_CHT = 50229;
 
 function StrUTF8ToEnc(const S: string; Enc: TSystemCodePage): string;
 var
@@ -634,6 +640,16 @@ begin
   Result:=StrUTF8ToEnc(S, CP_GB18030);
 end;
 
+function UTF8ToISO2022CHS(const S: string): string;
+begin
+  Result:=StrUTF8ToEnc(S, CP_ISO2022_CHS);
+end;
+
+function UTF8ToISO2022CHT(const S: string): string;
+begin
+  Result:=StrUTF8ToEnc(S, CP_ISO2022_CHT);
+end;
+
 function GB2312ToUTF8(const S: string): string;
 begin
   Result:=StrEncToUTF8(S, CP_GB2312);
@@ -642,6 +658,16 @@ end;
 function GB18030ToUTF8(const S: string): string;
 begin
   Result:=StrEncToUTF8(S, CP_GB18030);
+end;
+
+function ISO2022CHSToUTF8(const S: string): string;
+begin
+  Result:=StrEncToUTF8(S, CP_ISO2022_CHS);
+end;
+
+function ISO2022CHTToUTF8(const S: string): string;
+begin
+  Result:=StrEncToUTF8(S, CP_ISO2022_CHT);
 end;
 
 function UTF8ToSingleByte(const s: string; const UTF8CharConvFunc: TEncConvUnicodeToCharID): string;
@@ -809,6 +835,8 @@ const
     @CP950ToUTF8,
     @GB2312ToUTF8,
     @GB18030ToUTF8,
+    @ISO2022CHSToUTF8,
+    @ISO2022CHTToUTF8,
     {$ENDIF}
     @ISO_8859_1ToUTF8,
     @ISO_8859_2ToUTF8,
@@ -856,6 +884,8 @@ const
     @UTF8ToCP950,
     @UTF8ToGB2312,
     @UTF8ToGB18030,
+    @UTF8ToISO2022CHS,
+    @UTF8ToISO2022CHT,
     {$ENDIF}
     @UTF8ToISO_8859_1,
     @UTF8ToISO_8859_2,
