@@ -155,6 +155,28 @@ implementation
 {$include encconv_commoncodepages.inc}
 {$include encconv_commoncodepagefunctions.inc}
 
+function StrUTF8ToEnc(const S: string; Enc: TSystemCodePage): string;
+var
+  buf: RawByteString;
+begin
+  if S='' then exit('');
+  buf:= S;
+  SetCodePage(buf, Enc, true);
+  SetCodePage(buf, CP_UTF8, false);
+  Result:= buf;
+end;
+
+function StrEncToUTF8(const S: string; Enc: TSystemCodePage): string;
+var
+  buf: RawByteString;
+begin
+  if S='' then exit('');
+  buf:= S;
+  SetCodePage(buf, Enc, false);
+  SetCodePage(buf, CP_UTF8, true);
+  Result:= buf;
+end;
+
 function StrNone(const S: string): string;
 begin
   Result:= S;
