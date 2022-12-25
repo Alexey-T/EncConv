@@ -23,7 +23,7 @@ type
     eidUTF8,
     eidUTF8BOM,
     eidUCS2LE,
-    eidUCS2BE,
+    eidUCS2BE, //eidLastUnicode points here
 
     eidCP1250,
     eidCP1251,
@@ -69,6 +69,9 @@ type
     eidKOI8U,
     eidKOI8RU
     );
+
+const
+  eidLastUnicode = eidUCS2BE;
 
 const
   cEncConvNames: array[TEncConvId] of string = (
