@@ -122,7 +122,7 @@ const
     'koi8ru'
     );
 
-function EncConvFindEncoding(const s: string): TEncConvId;
+function EncConvFindEncoding(const s: string; Default: TEncConvId=eidUTF8): TEncConvId;
 
 function EncConvertFromUTF8(const S: string; Enc: TEncConvId): string;
 function EncConvertToUTF8(const S: string; Enc: TEncConvId): string;
@@ -754,14 +754,14 @@ begin
   SetLength(Result,len);
 end;
 
-function EncConvFindEncoding(const s: string): TEncConvId;
+function EncConvFindEncoding(const s: string; Default: TEncConvId=eidUTF8): TEncConvId;
 var
   e: TEncConvId;
 begin
   for e:= Low(cEncConvNames) to High(cEncConvNames) do
     if s=cEncConvNames[e] then
       exit(e);
-  Result:= eidUTF8;
+  Result:= Default;
 end;
 
 const
