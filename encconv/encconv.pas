@@ -105,7 +105,7 @@ const
     {$IFnDEF encconv_noasian}
     'shift-jis',
     'gbk',
-    'unified-hangul-code',
+    'uhc',
     'big5',
     'gb2312',
     'gb2312-hz',
