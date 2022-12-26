@@ -103,10 +103,10 @@ const
     'cp874',
 
     {$IFnDEF encconv_noasian}
-    'cp932',
-    'cp936',
-    'cp949',
-    'cp950',
+    'shift-jis',
+    'gbk',
+    'unified-hangul-code',
+    'big5',
     'gb2312',
     'gb2312-hz',
     'gb18030',
@@ -813,6 +813,17 @@ function EncConvFindEncoding(const s: string; Default: TEncConvId=eidUTF8): TEnc
 var
   e: TEncConvId;
 begin
+  case s of
+    'cp932':
+      exit(eidCP932);
+    'cp936':
+      exit(eidCP936);
+    'cp949':
+      exit(eidCP949);
+    'cp950':
+      exit(eidCP950);
+  end;
+
   for e:= Low(cEncConvNames) to High(cEncConvNames) do
     if s=cEncConvNames[e] then
       exit(e);
