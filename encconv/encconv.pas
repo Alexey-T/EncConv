@@ -53,6 +53,9 @@ type
     eidGB18030,
     eidISO2022_CHS,
     eidISO2022_CHT,
+    eidEUC_JP,
+    eidEUC_KR,
+    eidEUC_TW,
     {$ENDIF}
 
     eidISO1,
@@ -112,6 +115,9 @@ const
     'gb18030',
     'iso-2022-chs',
     'iso-2022-cht',
+    'euc-jp',
+    'euc-kr',
+    'euc-tw',
     {$ENDIF}
 
     'iso-8859-1',
@@ -174,6 +180,9 @@ const
   CP_GB18030 = 54936;
   CP_ISO2022_CHS = 50227;
   CP_ISO2022_CHT = 50229;
+  CP_EUC_JP = 51932;
+  CP_EUC_KR = 51949;
+  CP_EUC_TW = 20000;
 
 function StrUTF8ToEnc(const S: string; Enc: TSystemCodePage): string;
 var
@@ -662,6 +671,21 @@ begin
   Result:=StrUTF8ToEnc(S, CP_ISO2022_CHT);
 end;
 
+function UTF8ToEUC_JP(const S: string): string;
+begin
+  Result:=StrUTF8ToEnc(S, CP_EUC_JP);
+end;
+
+function UTF8ToEUC_KR(const S: string): string;
+begin
+  Result:=StrUTF8ToEnc(S, CP_EUC_KR);
+end;
+
+function UTF8ToEUC_TW(const S: string): string;
+begin
+  Result:=StrUTF8ToEnc(S, CP_EUC_TW);
+end;
+
 function GB2312ToUTF8(const S: string): string;
 begin
   Result:=StrEncToUTF8(S, CP_GB2312);
@@ -685,6 +709,21 @@ end;
 function ISO2022CHTToUTF8(const S: string): string;
 begin
   Result:=StrEncToUTF8(S, CP_ISO2022_CHT);
+end;
+
+function EUC_JPToUTF8(const S: string): string;
+begin
+  Result:=StrEncToUTF8(S, CP_EUC_JP);
+end;
+
+function EUC_KRToUTF8(const S: string): string;
+begin
+  Result:=StrEncToUTF8(S, CP_EUC_KR);
+end;
+
+function EUC_TWToUTF8(const S: string): string;
+begin
+  Result:=StrEncToUTF8(S, CP_EUC_TW);
 end;
 
 function UTF8ToSingleByte(const s: string; const UTF8CharConvFunc: TEncConvUnicodeToCharID): string;
@@ -866,6 +905,9 @@ const
     @GB18030ToUTF8,
     @ISO2022CHSToUTF8,
     @ISO2022CHTToUTF8,
+    @EUC_JPToUTF8,
+    @EUC_KRToUTF8,
+    @EUC_TWToUTF8,
     {$ENDIF}
     @ISO_8859_1ToUTF8,
     @ISO_8859_2ToUTF8,
@@ -916,6 +958,9 @@ const
     @UTF8ToGB18030,
     @UTF8ToISO2022CHS,
     @UTF8ToISO2022CHT,
+    @UTF8ToEUC_JP,
+    @UTF8ToEUC_KR,
+    @UTF8ToEUC_TW,
     {$ENDIF}
     @UTF8ToISO_8859_1,
     @UTF8ToISO_8859_2,
