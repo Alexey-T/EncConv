@@ -165,7 +165,7 @@ begin
         eemSkip:
           begin end;
         eemException:
-          raise EConvertError.Create('Cannot convert DBCS code page to UTF8');
+          raise EConvertError.Create('Cannot convert DBCS code page to UTF-8');
         eemReplace:
           begin
             Dest^:='?';
@@ -277,7 +277,7 @@ begin
       else
       case EncConvErrorMode of
         eemException:
-          raise EConvertError.Create('Cannot convert UTF8 to DBCS code page');
+          raise EConvertError.Create('Cannot convert UTF-8 to DBCS code page');
         eemReplace:
           begin
             Dest^ := '?';

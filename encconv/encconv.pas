@@ -182,6 +182,8 @@ begin
   if S='' then exit('');
   buf:= S;
   SetCodePage(buf, Enc, true);
+  if buf='' then
+    raise EConvertError.Create('Cannot convert UTF-8 to DBCS code page');
   SetCodePage(buf, CP_UTF8, false);
   Result:= buf;
 end;
@@ -194,6 +196,8 @@ begin
   buf:= S;
   SetCodePage(buf, Enc, false);
   SetCodePage(buf, CP_UTF8, true);
+  if buf='' then
+    raise EConvertError.Create('Cannot convert DBCS code page to UTF-8');
   Result:= buf;
 end;
 
