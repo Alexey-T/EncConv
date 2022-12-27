@@ -46,6 +46,7 @@ type
     {$IFnDEF encconv_noasian}
     eidCP932,
     eidCP936,
+    eidCNS,
     eidCP949,
     eidCP950,
     eidGB2312,
@@ -109,6 +110,7 @@ const
     {$IFnDEF encconv_noasian}
     'shift-jis',
     'gbk',
+    'cns',
     'uhc',
     'big5',
     'gb2312',
@@ -177,6 +179,7 @@ implementation
 {$include encconv_commoncodepagefunctions.inc}
 
 const
+  CP_CNS = 20000;
   CP_GB2312 = 20936;
   CP_GB2312_HZ = 52936;
   CP_GB18030 = 54936;
@@ -649,6 +652,16 @@ begin
   Result:=UTF8ToSingleByte(s,@UnicodeToMacintosh);
 end;
 
+function CNSToUTF8(const s: string): string;
+begin
+  Result:=StrEncToUTF8(S, CP_CNS);
+end;
+
+function UTF8ToCNS(const S: string): string;
+begin
+  Result:=StrUTF8ToEnc(S, CP_CNS);
+end;
+
 function UTF8ToGB2312(const S: string): string;
 begin
   Result:=StrUTF8ToEnc(S, CP_GB2312);
@@ -911,6 +924,7 @@ const
     {$IFnDEF encconv_noasian}
     @CP932ToUTF8,
     @CP936ToUTF8,
+    @CNSToUTF8,
     @CP949ToUTF8,
     @CP950ToUTF8,
     @GB2312ToUTF8,
@@ -965,6 +979,7 @@ const
     {$IFnDEF encconv_noasian}
     @UTF8ToCP932,
     @UTF8ToCP936,
+    @UTF8ToCNS,
     @UTF8ToCP949,
     @UTF8ToCP950,
     @UTF8ToGB2312,
