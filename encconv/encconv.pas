@@ -182,7 +182,7 @@ const
   CP_ISO2022_CHT = 50229;
   CP_EUC_JP = 51932;
   CP_EUC_KR = 51949;
-  CP_EUC_TW = 20000;
+  CP_EUC_TW = 51950;
 
 function StrUTF8ToEnc(const S: string; Enc: TSystemCodePage): string;
 var
