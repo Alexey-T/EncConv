@@ -55,7 +55,6 @@ type
     eidISO2022_CHS,
     eidISO2022_CHT,
     eidEUC_JP,
-    eidEUC_CN,
     eidEUC_KR,
     eidEUC_TW,
     {$ENDIF}
@@ -119,7 +118,6 @@ const
     'iso-2022-chs',
     'iso-2022-cht',
     'euc-jp',
-    'euc-cn',
     'euc-kr',
     'euc-tw',
     {$ENDIF}
@@ -186,7 +184,6 @@ const
   CP_ISO2022_CHS = 50227;
   CP_ISO2022_CHT = 50229;
   CP_EUC_JP = 51932;
-  CP_EUC_CN = 51936;
   CP_EUC_KR = 51949;
   CP_EUC_TW = 51950;
 
@@ -692,11 +689,6 @@ begin
   Result:=StrUTF8ToEnc(S, CP_EUC_JP);
 end;
 
-function UTF8ToEUC_CN(const S: string): string;
-begin
-  Result:=StrUTF8ToEnc(S, CP_EUC_CN);
-end;
-
 function UTF8ToEUC_KR(const S: string): string;
 begin
   Result:=StrUTF8ToEnc(S, CP_EUC_KR);
@@ -735,11 +727,6 @@ end;
 function EUC_JPToUTF8(const S: string): string;
 begin
   Result:=StrEncToUTF8(S, CP_EUC_JP);
-end;
-
-function EUC_CNToUTF8(const S: string): string;
-begin
-  Result:=StrEncToUTF8(S, CP_EUC_CN);
 end;
 
 function EUC_KRToUTF8(const S: string): string;
@@ -933,7 +920,6 @@ const
     @ISO2022CHSToUTF8,
     @ISO2022CHTToUTF8,
     @EUC_JPToUTF8,
-    @EUC_CNToUTF8,
     @EUC_KRToUTF8,
     @EUC_TWToUTF8,
     {$ENDIF}
@@ -988,7 +974,6 @@ const
     @UTF8ToISO2022CHS,
     @UTF8ToISO2022CHT,
     @UTF8ToEUC_JP,
-    @UTF8ToEUC_CN,
     @UTF8ToEUC_KR,
     @UTF8ToEUC_TW,
     {$ENDIF}
