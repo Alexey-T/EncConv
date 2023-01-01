@@ -50,10 +50,6 @@ type
     eidCP949,
     eidCP950,
     eidGB2312,
-    //eidGB2312_HZ,
-    eidGB18030,
-    //eidISO2022_CHS,
-    //eidISO2022_CHT,
     eidEUC_JP,
     eidEUC_KR,
     eidEUC_TW,
@@ -113,10 +109,6 @@ const
     'uhc',
     'big5',
     'gb2312',
-    //'gb2312-hz',
-    'gb18030',
-    //'iso-2022-chs',
-    //'iso-2022-cht',
     'euc-jp',
     'euc-kr',
     'euc-tw',
@@ -180,7 +172,7 @@ const
   CP_CNS = 20000;
   CP_GB2312 = 20936;
   //CP_GB2312_HZ = 52936;
-  CP_GB18030 = 54936;
+  //CP_GB18030 = 54936;
   CP_ISO2022_CHS = 50227;
   CP_ISO2022_CHT = 50229;
   CP_EUC_JP = 51932;
@@ -669,14 +661,12 @@ function UTF8ToGB2312HZ(const S: string): string;
 begin
   Result:=StrUTF8ToEnc(S, CP_GB2312_HZ);
 end;
-}
 
 function UTF8ToGB18030(const S: string): string;
 begin
   Result:=StrUTF8ToEnc(S, CP_GB18030);
 end;
 
-{
 function UTF8ToISO2022CHS(const S: string): string;
 begin
   Result:=StrUTF8ToEnc(S, CP_ISO2022_CHS);
@@ -713,14 +703,12 @@ function GB2312HZToUTF8(const S: string): string;
 begin
   Result:=StrEncToUTF8(S, CP_GB2312_HZ);
 end;
-}
 
 function GB18030ToUTF8(const S: string): string;
 begin
   Result:=StrEncToUTF8(S, CP_GB18030);
 end;
 
-{
 function ISO2022CHSToUTF8(const S: string): string;
 begin
   Result:=StrEncToUTF8(S, CP_ISO2022_CHS);
@@ -924,7 +912,7 @@ const
     @CP950ToUTF8,
     @GB2312ToUTF8,
     //@GB2312HZToUTF8,
-    @GB18030ToUTF8,
+    //@GB18030ToUTF8,
     //@ISO2022CHSToUTF8,
     //@ISO2022CHTToUTF8,
     @EUC_JPToUTF8,
@@ -978,7 +966,7 @@ const
     @UTF8ToCP950,
     @UTF8ToGB2312,
     //@UTF8ToGB2312HZ,
-    @UTF8ToGB18030,
+    //@UTF8ToGB18030,
     //@UTF8ToISO2022CHS,
     //@UTF8ToISO2022CHT,
     @UTF8ToEUC_JP,
