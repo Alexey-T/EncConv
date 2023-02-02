@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <Package Version="4">
+  <Package Version="5">
     <Name Value="encconv_package"/>
     <Author Value="Alexey Torgashin"/>
     <CompilerOptions>
@@ -9,15 +9,16 @@
         <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Description Value="Library to convert encoding inside a string, it is modified LConvEncoding to give simpler API"/>
+    <Description Value="Library to convert encoding inside strings. Modified LConvEncoding to give simpler API."/>
     <License Value="MPL 2.0, LGPL"/>
-    <Version Major="1"/>
+    <Version Major="1" Minor="1"/>
     <Files Count="1">
       <Item1>
         <Filename Value="encconv.pas"/>
         <UnitName Value="EncConv"/>
       </Item1>
     </Files>
+    <CompatibilityMode Value="True"/>
     <RequiredPkgs Count="2">
       <Item1>
         <PackageName Value="LazUtils"/>
