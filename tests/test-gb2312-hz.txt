@@ -1,0 +1,3 @@
+~{<rLeVPND~} gb2312-hz ~{1`Bk2bJT!#~}
+
+Simplified Chinese gb2312-hz encoding test.
